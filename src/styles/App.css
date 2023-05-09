@@ -1,0 +1,11 @@
+/* stylelint-disable font-family-no-missing-generic-family-keyword */
+@import './nullstyle.css';
+@import 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap';
+
+body{ 
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-family: Roboto;
+   background-color: #229ED9;
+}

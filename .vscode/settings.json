@@ -1,0 +1,38 @@
+{
+    "files.autoSave": "onFocusChange",
+    "editor.wordWrap": "on",
+    "workbench.editorAssociations": {
+        "*.js": "default"
+    },
+    "liveSassCompile.settings.generateMap": false,
+    "liveSassCompile.settings.formats": [
+        {
+            "format": "expanded",
+            "extensionName": ".css",
+            "savePath": null,
+            "savePathReplacementPairs": null
+        }
+    ],
+    "editor.minimap.enabled": false,
+    "liveServer.settings.mount": [],
+    "[scss]": {
+      "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+  "files.autoSaveDelay": 900,
+  "stylelint.config": null,
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "stylelint.enable": true,
+  "stylelint.validate": [
+      "css",
+      "less",
+      "postcss",
+      "scss"
+  ],
+  "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true,
+      "source.fixAll.stylelint": true
+  },
+"typescript.tsdk": "./node_modules/typescript/lib.",
+}

@@ -1,0 +1,17 @@
+{
+  "react component": {
+    "scope": "javascript, javascriptreact, typescriptreact",
+    "prefix": "imrcc",
+    "body": [
+      "",
+      "const ${TM_FILENAME_BASE} = ({}) => {",
+      "",
+      " return (",
+      "\t<div className='${.TM_FILENAME_BASE}'></div>",
+      " );",
+      "}",
+      "export default ${TM_FILENAME_BASE}",
+    ],
+    "description": "Создать React-компонент по умолчанию. Импортируется scss-модуль и функция для работы с классами classnames."
+  }
+}
