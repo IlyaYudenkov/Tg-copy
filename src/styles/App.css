@@ -4,8 +4,7 @@
 
 body{ 
    display: flex;
-   align-items: center;
-   justify-content: center;
+   flex: 1;
    font-family: Roboto;
    background-color: #229ED9;
 }

@@ -1,0 +1,35 @@
+.sidebar{
+    display: flex;
+    flex: .33;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-right: 1px solid rgb(190 190 190 / 10%);
+    height: 100vh;
+    background-color: #fff;
+
+  &__header{
+    display: flex;
+    align-items: center;
+    margin: 7px 0 ;
+    padding: 10px;
+    height: 50px;
+  }  
+}
+
+.header{
+    &__search input{
+        display: flex;
+        flex: 1;
+        border: 2px solid transparent;
+        border-radius: 5px;
+        padding: 7px;
+        background-color: rgb(235 233 233);
+        transition-duration: 0.3s;
+
+        &:focus{
+          border: 2px solid lightblue;
+          background-color: #fff;
+          transition-duration: 0.3s;
+        }
+    }
+}

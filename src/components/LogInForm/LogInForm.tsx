@@ -4,7 +4,6 @@ import style from './LogInForm.module.scss';
 import {
   Formik,
   Form,
-  Field,
 } from 'formik';
 import { LogInSchema } from '../../schemas/LogInSchema';
 import FormInput from '../Input/FormInput';
