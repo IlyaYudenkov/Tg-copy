@@ -1,12 +1,18 @@
 .sidebarMessage{
-    display: flex;
-    align-items: center;
-    padding: 20px;
+    display: grid;
+    padding: 10px;
+    transition-duration: 0.3s;
+    cursor: pointer;
 
     &__details{
         display: flex;
         flex-direction: column;
         width: 100%;
+    }
+
+    &:hover{
+        background-color: rgb(235 233 233);
+        transition-duration: 0.3s;
     }
 }
 
@@ -25,10 +31,18 @@
 .top{
     &__name{
         font-weight: 700;
-        font-size: 16px;
+        font-size: 14px;  
     }
 
+    &__time{
+        display: flex;
+        align-items:center ;
+        font-size: 12px;
+    }
+}
+
+.bottom{
     &__text{
-        font-size: 16px;
+        font-size: 14px; 
     }
 }

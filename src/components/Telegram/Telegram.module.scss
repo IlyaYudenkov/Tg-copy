@@ -1,0 +1,6 @@
+.telegram{
+    display: grid;
+    grid-template-areas: 'sidebar chatWindow';
+    grid-template-columns: 0.25fr 0.75fr;
+    grid-template-rows: 1fr;
+}

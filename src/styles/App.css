@@ -2,9 +2,10 @@
 @import './nullstyle.css';
 @import 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap';
 
-body{ 
+body {
    display: flex;
-   flex: 1;
+   align-items: center;
+   justify-content: center;
    font-family: Roboto;
    background-color: #229ED9;
 }

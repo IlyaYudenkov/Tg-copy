@@ -1,0 +1,24 @@
+.chatInput{
+    &__input{
+        display: grid;
+        grid-area: input;
+        grid-template-columns: 0.9fr 0.1fr;
+     
+        & textarea{
+            border: none;
+            padding: 15px 7px;
+            font-size: 14px;
+            resize: none;
+        }
+    }
+
+    &__file{
+        display: grid;
+        grid-area: file;
+        padding: 5px;
+    
+        & input{
+            cursor: pointer;
+        }
+    }
+}

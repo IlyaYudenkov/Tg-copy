@@ -6,7 +6,7 @@ import {
   Form,
 } from 'formik';
 import { LogInSchema } from '../../schemas/LogInSchema';
-import FormInput from '../Input/FormInput';
+import FormInput from '../Inputs/FormInput/FormInput';
 
 interface MyFormValues {
   email: string;

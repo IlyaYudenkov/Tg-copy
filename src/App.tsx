@@ -1,12 +1,13 @@
 import React from 'react';
-import LogInForm from './components/LogInForm/LogInForm';
 import './styles/App.css';
-import Sidebar from './components/Sidebar/Sidebar';
+import Telegram from './components/Telegram/Telegram';
 
 function App() {
   return (
     <div className="App">
-      <Sidebar/>
+      <Telegram/>
+
+      
     </div>
   );
 }
