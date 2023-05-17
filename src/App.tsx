@@ -5,7 +5,7 @@ import Telegram from './components/Telegram/Telegram';
 function App() {
   return (
     <div className="App">
-      <Telegram/>
+      <Telegram />
 
       
     </div>

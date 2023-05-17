@@ -1,9 +1,22 @@
-import React from 'react';
+import React, {FC} from 'react';
 import style from './Sidebar.module.scss';
 import SidebarMessage from '../SidebarMessage/SidebarMessage';
 
+interface SidebarProps{
+  messageId: string
+}
 
-const Sidebar = () => {
+interface IChats{
+  id: number,
+  userFrom: number,
+  userTo: number,
+  text: string,
+  createdAt: string
+}
+
+
+const Sidebar:FC<SidebarProps> = () => {
+
 
  return (
    <div className={style.sidebar}>
@@ -15,12 +28,10 @@ const Sidebar = () => {
        </div>
      </div>
      <div className={style.sidebar__main}>
-       <SidebarMessage/>
-       <SidebarMessage/>
-       <SidebarMessage/>
-       <SidebarMessage/>
-      
-
+       <SidebarMessage userFrom={0} userTo={0} text={''} time={''}/>
+       <SidebarMessage userFrom={0} userTo={0} text={''} time={''}/>
+       <SidebarMessage userFrom={0} userTo={0} text={''} time={''}/>
+       <SidebarMessage userFrom={0} userTo={0} text={''} time={''}/>
 
      </div>
 

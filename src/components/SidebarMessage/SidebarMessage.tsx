@@ -1,6 +1,18 @@
-import React from 'react';
+import React, {FC} from 'react';
 import style from './SidebarMessage.module.scss';
-const SidebarMessage = () => {
+
+export interface IChat{
+  userFrom: number,
+  userTo: number,
+  text: string,
+  time: string
+}
+
+
+
+const SidebarMessage:FC<IChat> = () => {
+
+
 
   return (
     <div className={style.sidebarMessage}>

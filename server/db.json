@@ -1,0 +1,45 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "Ilya Yudenkov",
+            "email": "ilya-yudenkov@mail.ru",
+            "password": 1234
+        },
+        {
+            "id": 2,
+            "name": "Max Sobolev",
+            "email": "maxsobolev@rambler.ru",
+            "password": 123456
+        },
+        {
+            "id": 3,
+            "name": "Peter Parker",
+            "email": "peter@tut.by",
+            "password": 1357
+        }
+    ],
+    "messages":[
+        {
+            "id": 1,
+            "userFrom": 2,
+            "userTo": 1,
+            "text": "Hello, how're you?",
+            "createdAt": "16.05.2023"
+        },
+        {
+            "id": 2,
+            "userFrom": 2,
+            "userTo": 1,
+            "text": "dasdasd?",
+            "createdAt": "16.05.2023"
+        },
+        {
+            "id": 3,
+            "userFrom": 2,
+            "userTo": 1,
+            "text": "dasdassdd?",
+            "createdAt": "16.05.2023"
+        }
+    ]
+}

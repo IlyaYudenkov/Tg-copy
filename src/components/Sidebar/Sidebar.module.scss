@@ -1,11 +1,10 @@
 .sidebar{
     display: grid;
     grid-template-areas: 'head' 'main';
-    grid-template-columns: 1fr;
-    grid-template-rows: 50px 0.3fr;
+    grid-template-columns: minmax(10vh, 50vh);
+    grid-template-rows: 50px 5vh;
     overflow-y: auto;
     border-right: 1px solid rgb(235 233 233);
-    height: 100vh;
     background-color: #fff;
 
   &::-webkit-scrollbar{
