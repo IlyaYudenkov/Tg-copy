@@ -1,16 +1,14 @@
-import React  from 'react';
+import React, { FC }  from 'react';
 import ChatWindow from '../ChatWindow/ChatWindow';
 import Sidebar from '../Sidebar/Sidebar';
 import style from './Telegram.module.scss';
 
-
-
-const Telegram = () => {
+const Telegram:FC = () => {
 
  return (
    <div className={style.telegram}>
-     <Sidebar messageId={''} />
-     <ChatWindow name={'Max Sobolev'} text={'Hello, how are you'}/>
+     <Sidebar messageId={''}/>
+     <ChatWindow />
    </div>
  );
 };

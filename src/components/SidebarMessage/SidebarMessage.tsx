@@ -1,16 +1,17 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import style from './SidebarMessage.module.scss';
 
-export interface IChat{
+
+interface IChat{
+  id: number,
   userFrom: number,
-  userTo: number,
   text: string,
-  time: string
+  createdAt: string
 }
 
 
 
-const SidebarMessage:FC<IChat> = () => {
+const SidebarMessage: FC <IChat>= ({ userFrom, text, createdAt}) => {
 
 
 
@@ -19,11 +20,11 @@ const SidebarMessage:FC<IChat> = () => {
       <div className={style.sidebarMessage__avatar}></div>
       <div className={style.sidebarMessage__details}>
         <div className={style.details__top}>
-          <div className={style.top__name}>name</div>
-          <div className={style.top__time}>time</div>
+          <div className={style.top__name}>{userFrom}</div>
+          <div className={style.top__time}>{createdAt}</div>
         </div>
         <div className={style.details__bottom}>
-          <div className={style.bottom__text}>text</div>
+          <div className={style.bottom__text}>{text}</div>
         </div>
       </div>
 

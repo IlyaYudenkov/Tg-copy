@@ -1,8 +1,9 @@
+/* stylelint-disable declaration-block-no-redundant-longhand-properties */
 .chatWindow{
     display: grid;
     grid-area: chatWindow;
     grid-template-areas: 'head' 'main';
-    grid-template-columns: minmax(120vh,200vh);
+    grid-template-columns: minmax(60vh,160vh);
     grid-template-rows: 60px 1fr;
 
     &__header{
@@ -55,7 +56,7 @@
     display: grid;
     grid-area: chat;
     grid-template-columns: 1fr;
-    grid-template-rows: 82.5vh;
+    grid-template-rows: 80vh;
     overflow-y: auto;
     font-size: 50px;
     line-height: 1em;
