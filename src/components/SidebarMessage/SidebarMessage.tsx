@@ -4,9 +4,9 @@ import style from './SidebarMessage.module.scss';
 
 interface IChat{
   id: number,
-  userFrom: number,
+  userFrom: string,
   text: string,
-  createdAt: string
+  createdAt: string,
 }
 
 

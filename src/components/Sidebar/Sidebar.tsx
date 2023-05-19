@@ -1,26 +1,34 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import style from './Sidebar.module.scss';
 import SidebarMessage from '../SidebarMessage/SidebarMessage';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import type { } from 'redux-thunk/extend-redux';
 import { useActions } from '../../hooks/useActions';
-import { fetchChats } from '../../store/actionCreators/chat';
+import ChatsNotFound from '../../helpers/ChatsNotFound';
+import Loader from '../../helpers/Loader';
+import Error from '../../helpers/Error';
 
 interface SidebarProps {
   messageId: string
 }
 
+const Sidebar: FC<SidebarProps> = ({ }) => {
 
-const Sidebar: FC<SidebarProps> = () => {
-  const { chats, error } = useTypedSelector(state => state.chat);
+  const { chats, error, loading } = useTypedSelector(state => state.chat);
 
   const { fetchChats } = useActions();
 
-
+  
   useEffect(() => {
     (fetchChats());
   }, []);
+  
 
+  const [searchValue, setSearchValue] = useState('');
+  
+  const filteredChats = chats.filter(chat => {
+    return chat.userFrom.toLowerCase().includes(searchValue.toLowerCase());
+  });
 
   return (
     <div className={style.sidebar}>
@@ -28,17 +36,16 @@ const Sidebar: FC<SidebarProps> = () => {
         <div className={style.header__burger}>
         </div>
         <div className={style.header__search}>
-          <input type="text" placeholder='Search' />
+          <input type="text" placeholder='Search' onChange={(e) => setSearchValue(e.target.value)} />
         </div>
       </div>
       <div className={style.sidebar__main}>
-        {error ? error : null}
-        {chats ? chats.map(chat =>
+        {!loading && !filteredChats.length && !error ? <ChatsNotFound/> : null}
+        {error ? <Error/>: null}
+        {!loading && filteredChats ? filteredChats.map(chat =>
           <SidebarMessage key={chat.id} id={chat.id} userFrom={chat.userFrom} text={chat.text} createdAt={chat.createdAt} />)
-          : 'Loading...'}
-
+          : <Loader/>}
       </div>
-
     </div>
   );
 };

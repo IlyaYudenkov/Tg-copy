@@ -1,10 +1,11 @@
 /* stylelint-disable declaration-block-no-redundant-longhand-properties */
-.chatWindow{
+.chatWindowActive{
     display: grid;
     grid-area: chatWindow;
     grid-template-areas: 'head' 'main';
     grid-template-columns: minmax(60vh,160vh);
     grid-template-rows: 60px 1fr;
+    
 
     &__header{
         display: grid;
@@ -23,6 +24,11 @@
         grid-template-columns: 1fr;
         grid-template-rows: 1fr minmax(50px, 70px);
     }
+
+    &__chooseChat{
+        display: none;
+    }
+
 }
 
 .header{
@@ -71,3 +77,37 @@
     background-color: #fff;
 }
  }
+
+.chatWindow{
+    display: grid;
+    align-items: center;
+    grid-template-columns: minmax(60vh,160vh);
+    grid-template-rows: 1fr;
+
+    &__header{
+        display: none
+    }
+
+    &__main{
+        display: none;
+    }
+
+    &__chooseChat{
+        display: grid;
+        align-items: center;
+        justify-content: center;
+}
+}
+
+.chooseChat{
+    &__text{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #000;
+        border-radius: 10px;
+        padding: 20px;
+        font-size: 18px;
+        background-color: #fff;
+    }
+}

@@ -22,21 +22,21 @@
     "messages":[
         {
             "id": 1,
-            "userFrom": 2,
-            "userTo": 1,
+            "userFrom": "1",
+            "userTo": 2,
             "text": "Hello, how're you?",
             "createdAt": "16.05.2023"
         },
         {
             "id": 2,
-            "userFrom": 2,
+            "userFrom": "2",
             "userTo": 1,
             "text": "dasdasd?",
             "createdAt": "16.05.2023"
         },
         {
             "id": 3,
-            "userFrom": 2,
+            "userFrom": "3",
             "userTo": 1,
             "text": "dasdassdd?",
             "createdAt": "16.05.2023"
