@@ -1,11 +1,8 @@
-import { combineReducers } from 'redux';
+import chatReducer  from './chatReducer';
 
 
-import { chatReducer } from './chatReducer';
-
-export const rootReducer = combineReducers({
+export const rootReducer = {
     chat: chatReducer
-});
+};
 
 
-export type RootState = ReturnType<typeof rootReducer>;

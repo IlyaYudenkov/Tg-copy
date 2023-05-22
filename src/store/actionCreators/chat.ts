@@ -1,17 +1,16 @@
-import { Dispatch } from 'react';
-import { ChatAction, ChatActionTypes } from '../../types/chats';
 import axios from 'axios';
+import chatReducer from '../reducers/chatReducer';
+import { AppDispatch } from '../store';
+import { IChat } from '../../types/chats';
 
-export const fetchChats = () => {
-    return async (dispatch: Dispatch<ChatAction>) => {
-        try {
-            dispatch({ type: ChatActionTypes.FETCH_CHATS });
-            const response = await axios.get('http://localhost:3001/messages');
-            dispatch({ type: ChatActionTypes.FETCH_CHATS_SUCCESS, payload: response.data });
-            
-        } catch (error) {
-            dispatch({ type: ChatActionTypes.FETCH_CHATS_ERROR, payload: 'Error' });
+export const fetchChats = () => async (dispatch: AppDispatch) => {
+    try {
+        dispatch(chatReducer.actions.chatFetching());
+        const response = await axios.get<IChat[]>('http://localhost:3001/messages');
+        dispatch(chatReducer.actions.chatFetchingSuccess(response.data));
 
-        }
-    };
+    } catch (e) {
+        dispatch(chatReducer.actions.chatFetchingError('Error'));
+
+    }
 };

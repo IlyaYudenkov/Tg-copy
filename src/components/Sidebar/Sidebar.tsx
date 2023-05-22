@@ -30,6 +30,7 @@ const Sidebar: FC<SidebarProps> = ({ }) => {
     return chat.userFrom.toLowerCase().includes(searchValue.toLowerCase());
   });
 
+
   return (
     <div className={style.sidebar}>
       <div className={style.sidebar__header}>

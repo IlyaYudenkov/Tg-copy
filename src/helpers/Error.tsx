@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Helpers.module.scss';
 
-const Error = () => {
+const Error = ({}) => {
 
  return (
    <div className={style.helpers}>
