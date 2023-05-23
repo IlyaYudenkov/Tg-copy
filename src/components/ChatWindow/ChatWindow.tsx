@@ -9,6 +9,7 @@ const ChatWindow = () => {
 
 const {chats} = useTypedSelector(state => state.chat);
 
+
 return (
 
   <div className={true ? style.chatWindowActive : style.chatWindow}>

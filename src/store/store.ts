@@ -1,26 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { rootReducer } from './reducers/rootReducer';
+import chatReducer from './reducers/chatReducer';
+import chosenChatReducer from './reducers/chosenChatReducer';
 
 
-const store = configureStore({
-   reducer: rootReducer,
-   
+export const store = configureStore({
+   reducer: {
+      chat: chatReducer,
+      chosenChat: chosenChatReducer
+   }
 });
 
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch;
-/*import { rootReducer } from './reducers/rootReducer';
-import { applyMiddleware, createStore } from '@reduxjs/toolkit';
-import thunk from 'redux-thunk';
 
-
-const store = createStore(rootReducer, applyMiddleware(thunk));
-
-export const useStoreDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof store.getState>
-
-*/
-
-
-export default store;

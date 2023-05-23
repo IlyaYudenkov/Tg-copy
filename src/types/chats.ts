@@ -1,6 +1,5 @@
-
 export interface IChat{
-    id: number,
+    id: string,
     userFrom: string,
     text: string,
     createdAt: string
@@ -10,5 +9,10 @@ export interface IChat{
     chats: IChat[],
     loading: boolean,
     error: null | string
+}
+
+
+export interface ChosenChatState{
+  chosenChat: null | string,
 }
 

@@ -1,16 +1,25 @@
 import React, { FC } from 'react';
 import style from './SidebarMessage.module.scss';
 import { IChat } from '../../types/chats';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { useDispatch } from 'react-redux';
+import { chatChoose } from '../../store/reducers/chosenChatReducer';
 
 
 
 
-const SidebarMessage: FC <IChat>= ({ userFrom, text, createdAt}) => {
+const SidebarMessage: FC<IChat> = ({ id, userFrom, text, createdAt }) => {
+const dispatch = useDispatch();
 
+
+const { chosenChat} = useTypedSelector(state => state.chosenChat);
+const chooseChat = () => {
+  dispatch(chatChoose(id));
+};
 
 
   return (
-    <div className={style.sidebarMessage}>
+    <div className={style.sidebarMessage} >
       <div className={style.sidebarMessage__avatar}>{userFrom}</div>
       <div className={style.sidebarMessage__details}>
         <div className={style.details__top}>
