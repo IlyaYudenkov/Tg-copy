@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { ChatState, IChat } from '../../types/chats';
+import { ChatState, IChat } from '../../types/types';
 
 
-const chatReducer = createSlice({
+const chatsReducer = createSlice({
     name: 'chats',
     initialState: <ChatState>{
         chats: [],
@@ -10,15 +10,15 @@ const chatReducer = createSlice({
         error: '',
     },
     reducers: {
-        chatFetching(state) {
+        chatsFetching(state) {
             state.loading = true;
         },
-        chatFetchingSuccess(state, action: PayloadAction<IChat[]>) {
+        chatsFetchingSuccess(state, action: PayloadAction<IChat[]>) {
             state.loading = false;
             state.error = '';
             state.chats = action.payload;
         },
-        chatFetchingError(state, action: PayloadAction<string>) {
+        chatsFetchingError(state, action: PayloadAction<string>) {
             state.loading = false;
             state.error = action.payload;
         }
@@ -26,6 +26,6 @@ const chatReducer = createSlice({
 
 });
 
-export default chatReducer.reducer;
-export const chatFetching = chatReducer.actions;
+export default chatsReducer.reducer;
+export const chatsFetching = chatsReducer.actions;
 

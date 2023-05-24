@@ -1,4 +1,4 @@
-import chatReducer  from './chatReducer';
+import chatReducer  from './chatsReducer';
 import chosenChatReducer from './chosenChatReducer';
 
 

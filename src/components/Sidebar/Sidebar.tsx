@@ -7,28 +7,33 @@ import { useActions } from '../../hooks/useActions';
 import ChatsNotFound from '../../helpers/ChatsNotFound';
 import Loader from '../../helpers/Loader';
 import Error from '../../helpers/Error';
+import useSWR from 'swr';
+import { IUser } from '../../types/types';
+import { fetcher } from '../../helpers/fetcher';
 
-interface SidebarProps {
-  messageId: string
-}
 
-const Sidebar: FC<SidebarProps> = ({ }) => {
+const Sidebar: FC = ({ }) => {
 
   const { chats, error, loading } = useTypedSelector(state => state.chat);
 
   const { fetchChats } = useActions();
 
-  
+
   useEffect(() => {
     (fetchChats());
   }, []);
-  
+
 
   const [searchValue, setSearchValue] = useState('');
-  
+
   const filteredChats = chats.filter(chat => {
     return chat.userFrom.toLowerCase().includes(searchValue.toLowerCase());
   });
+
+  
+  const urlUser = 'http://localhost:3001/users';
+
+  const { data: user } = useSWR<IUser>(urlUser, fetcher);
 
 
   return (
@@ -41,11 +46,11 @@ const Sidebar: FC<SidebarProps> = ({ }) => {
         </div>
       </div>
       <div className={style.sidebar__main}>
-        {!loading && !filteredChats.length && !error ? <ChatsNotFound/> : null}
-        {error ? <Error/>: null}
+        {!loading && !filteredChats.length && !error ? <ChatsNotFound /> : null}
+        {error ? <Error /> : null}
         {!loading && filteredChats ? filteredChats.map(chat =>
           <SidebarMessage key={chat.id} id={chat.id} userFrom={chat.userFrom} text={chat.text} createdAt={chat.createdAt} />)
-          : <Loader/>}
+          : <Loader />}
       </div>
     </div>
   );

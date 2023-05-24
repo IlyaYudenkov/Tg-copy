@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import chatReducer from './reducers/chatReducer';
+import chatReducer from './reducers/chatsReducer';
 import chosenChatReducer from './reducers/chosenChatReducer';
 
 

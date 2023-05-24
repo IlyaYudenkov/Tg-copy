@@ -4,3 +4,10 @@
     font-size: 18px;
     text-align: center;
 }
+
+.helpersChatWindow{
+    display: grid;
+    grid-template-areas: 'head' 'main';
+    grid-template-columns: minmax(60vh,160vh);
+    grid-template-rows: 60px 1fr;
+}

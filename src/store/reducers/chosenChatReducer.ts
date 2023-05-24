@@ -1,16 +1,13 @@
-import {PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { ChosenChatState } from '../../types/chats';
-
-
-
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { ChosenChatState } from '../../types/types';
 
 const chosenChatReducer = createSlice({
     name: 'chosenChat',
     initialState: <ChosenChatState>{
         chosenChat: null,
     },
-    reducers:{
-        chatChoose:(state, action: PayloadAction <string>) => {
+    reducers: {
+        chatChoose: (state, action: PayloadAction<string>) => {
             state.chosenChat = action.payload;
         },
     }
@@ -18,4 +15,4 @@ const chosenChatReducer = createSlice({
 });
 
 export default chosenChatReducer.reducer;
-export const {chatChoose} = chosenChatReducer.actions;
+export const { chatChoose } = chosenChatReducer.actions;
