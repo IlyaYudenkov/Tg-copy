@@ -6,20 +6,19 @@ const chatsReducer = createSlice({
     name: 'chats',
     initialState: <ChatState>{
         chats: [],
-        loading: false,
+        isLoading: false,
         error: '',
     },
     reducers: {
         chatsFetching(state) {
-            state.loading = true;
+            state.isLoading = true;
         },
         chatsFetchingSuccess(state, action: PayloadAction<IChat[]>) {
-            state.loading = false;
+            state.isLoading = false;
             state.error = '';
             state.chats = action.payload;
         },
         chatsFetchingError(state, action: PayloadAction<string>) {
-            state.loading = false;
             state.error = action.payload;
         }
     }

@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import chatReducer from './reducers/chatsReducer';
+import chatsReducer from './reducers/chatsReducer';
 import chosenChatReducer from './reducers/chosenChatReducer';
+import searchChatsReducer from './reducers/searchChatsReducer';
 
 
 export const store = configureStore({
    reducer: {
-      chat: chatReducer,
+      chat: chatsReducer,
+      searchChats: searchChatsReducer,
       chosenChat: chosenChatReducer
    }
 });

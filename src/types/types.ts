@@ -1,6 +1,6 @@
 export interface IChat {
   id: string,
-  userFrom: string,
+  userFrom: string ,
   text: string,
   createdAt: string
 }
@@ -8,13 +8,13 @@ export interface IChat {
 
 export interface IChats {
   chat: IChat[],
-  loading: boolean,
+  isLoading: boolean,
   error: null | string
 }
 
 export interface ChatState {
   chats: IChat[],
-  loading: boolean,
+  isLoading: boolean,
   error: null | string
 }
 
@@ -22,8 +22,13 @@ export interface ChosenChatState {
   chosenChat: null | string,
 }
 
-export interface IUser{
-  id: string,
-  name: string
+export interface searchState {
+  searchInput: string,
 }
+
+export interface IUser {
+  id: string,
+  name: string 
+}
+
 

@@ -9,7 +9,7 @@ const Telegram:FC = () => {
 
  return (
    <div className={style.telegram}>
-     <Sidebar />
+     <Sidebar  />
      <ChatWindow />
    </div>
  );

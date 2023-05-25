@@ -10,22 +10,18 @@ import Loader from '../../helpers/Loader';
 
 
 
-
-
 const ChatWindow: FC = () => {
-
 
   const { chosenChat } = useTypedSelector(state => state.chosenChat);
   
   const urlChat = `http://localhost:3001/messages/${chosenChat}`;
 
-  const { data: chat, isLoading } = useSWR<IChat>(urlChat, fetcher);
+  const { data: chat, isLoading } = useSWR<IChat>(chosenChat ? urlChat : null, fetcher);
 
-  const userNameNumber =  chat?.userFrom;
+  const urlUser = `http://localhost:3001/users/${chat?.userFrom}`;
 
-  const urlUser = `http://localhost:3001/users/${userNameNumber}`;
+  const { data: user } = useSWR<IUser>(chat ? urlUser : null, fetcher);
 
-  const { data: user } = useSWR<IUser>(urlUser, fetcher);
 
   if (isLoading) return (
     <div className={styles.helpersChatWindow}>
@@ -39,7 +35,7 @@ const ChatWindow: FC = () => {
     <div className={chosenChat ? style.chatWindowActive : style.chatWindow}>
       <div className={chosenChat ? style.chatWindowActive__header : style.chatWindow__header}>
         <div className={style.header__person}>
-          <div className={style.person__avatar}>{user?.name}.</div>
+          <div className={style.person__avatar}>{user?.name.substring(0,2).toUpperCase()}</div>
           <div className={style.person__info}>
             <div className={style.info__name}>{user?.name}</div>
             <div className={style.info__lastSeen}>just now</div>
