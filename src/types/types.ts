@@ -12,11 +12,12 @@ export interface IChats {
   error: null | string
 }
 
-export interface ChatState {
+export interface ChatsState {
   chats: IChat[],
   isLoading: boolean,
   error: null | string
 }
+
 
 export interface ChosenChatState {
   chosenChat: null | string,
@@ -28,7 +29,11 @@ export interface searchState {
 
 export interface IUser {
   id: string,
-  name: string 
+  name: string ,
+  email: string,
+  password: string
 }
+
+
 
 

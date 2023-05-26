@@ -1,10 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { ChatState, IChat } from '../../types/types';
+import { ChatsState, IChat } from '../../types/types';
 
 
 const chatsReducer = createSlice({
     name: 'chats',
-    initialState: <ChatState>{
+    initialState: <ChatsState>{
         chats: [],
         isLoading: false,
         error: '',

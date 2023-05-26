@@ -6,7 +6,7 @@ import searchChatsReducer from './reducers/searchChatsReducer';
 
 export const store = configureStore({
    reducer: {
-      chat: chatsReducer,
+      chats: chatsReducer,
       searchChats: searchChatsReducer,
       chosenChat: chosenChatReducer
    }
