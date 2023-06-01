@@ -10,6 +10,7 @@ import FormInput from '../FormInput/FormInput';
 import useSWR from 'swr';
 import { IUser } from '../../types/types';
 import { fetcher } from '../../helpers/fetcher';
+import { urlUsers } from '../../url/url';
 
 
 interface MyFormValues {
@@ -23,7 +24,7 @@ const LogInForm: FC = () => {
 
   const [correctData, setCorrectData] = useState(false);
 
-  const { data: users, error } = useSWR<IUser[]>('http://localhost:3001/users', fetcher);
+  const { data: users, error } = useSWR<IUser[]>(urlUsers, fetcher);
   return (
     <div>
       <h1 className={style.h1}>Autorization</h1>

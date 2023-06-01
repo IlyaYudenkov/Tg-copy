@@ -8,19 +8,33 @@ import Loader from '../../helpers/Loader';
 import Error from '../../helpers/Error';
 import HeaderSearch from '../HeaderSearch/HeaderSearch';
 import useSWR from 'swr';
-import { IChat } from '../../types/types';
+import { IChat, IUser } from '../../types/types';
 import { fetcher } from '../../helpers/fetcher';
+import { urlChats, urlUsers } from '../../url/url';
 
 
 
 const Sidebar: FC = () => {
 
   const { searchInput } = useTypedSelector(state => state.searchChats);
-  const { data: chats, error, isLoading } = useSWR<IChat[]>('http://localhost:3001/messages', fetcher);
 
+  const { data: chats, error, isLoading } = useSWR<IChat[]>(urlChats, fetcher);
+
+  const { data: users } = useSWR<IUser[]>(chats ? urlUsers : null, fetcher);
+
+
+  //???
   const filteredChats = chats && chats.filter(chat => {
-    return chat.userFrom.toLowerCase().includes(searchInput.toLowerCase());
+    users && users.map(user => {
+      if (user.id == chat.userFrom) {
+        chat.userFrom = user.name;
+      }
+    });
+    return chat && chat.userFrom.toLowerCase().includes(searchInput.toLowerCase());
+
   });
+  ///
+
 
   return (
     <div className={style.sidebar}>

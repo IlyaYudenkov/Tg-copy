@@ -11,3 +11,24 @@
     grid-template-columns: minmax(60vh,160vh);
     grid-template-rows: 60px 1fr;
 }
+
+.contextMenu{   
+    position: absolute;
+    left: 5%;
+    bottom: 41px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    background: white;
+    transition-duration: 0.3s;
+    cursor: pointer;
+
+    &:hover{
+        background:rgb(235 233 233);
+        transition-duration: 0.3s;
+    }
+}

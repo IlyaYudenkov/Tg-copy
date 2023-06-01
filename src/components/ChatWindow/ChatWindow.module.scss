@@ -5,7 +5,7 @@
     grid-template-areas: 'head' 'main';
     grid-template-columns: minmax(60vh,160vh);
     grid-template-rows: 60px 1fr;
-    
+    overflow-y: hidden;
 
     &__header{
         display: grid;
@@ -23,6 +23,7 @@
         grid-template-areas: 'chat' 'input';
         grid-template-columns: 1fr;
         grid-template-rows: 1fr minmax(50px, 70px);
+        overflow: hidden;
     }
 
     &__chooseChat{
@@ -34,7 +35,6 @@
 .header{
     &__person{
         display: flex;
-    
     }
 }
 
@@ -61,7 +61,7 @@
     &__name{
         margin-bottom: 5px;
         font-weight: 700;
-        font-size: 14px;  
+        font-size: 14px;
     }
 
     &__lastSeen{
@@ -70,25 +70,70 @@
 }
 
 .main{
- &__chat{
-    display: grid;
-    grid-area: chat;
-    grid-template-columns: 1fr;
-    grid-template-rows: 80vh;
-    overflow-y: auto;
-    font-size: 50px;
-    line-height: 1em;
- }
+    &__chat{
+        display: grid;
+        align-items: flex-end;
+        grid-area: chat;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        overflow-y: auto;
+        height: 100%;
+    }
 
- &__chatInput{
-    display: grid;
-    grid-area: input;
-    grid-template-areas: 'file input';
-    grid-template-columns: 0.05fr 0.95fr;
-    grid-template-rows:  minmax(50px, 70px);
-    background-color: #fff;
+    &__chatInput{
+        display: grid;
+        grid-area: input;
+        grid-template-areas: 'file input';
+        grid-template-columns: 0.05fr 0.95fr;
+        grid-template-rows:  minmax(50px, 70px);
+        background-color: #fff;
+    }
 }
- }
+
+.chat{
+    &__messageUserFrom{
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        justify-self: flex-start;
+        margin: 15px 0;
+        border-radius: 7px;
+        padding: 10px;
+        max-width: 65vh;
+        background: white;
+    }
+
+    &__messageUserTo{
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        justify-self: flex-end;
+        margin: 15px 0;
+        border-radius: 7px;
+        padding: 10px;
+        max-width: 65vh;
+        background: white;
+    }
+}
+
+.message{
+    &__text{
+        overflow-wrap: break-word;
+        max-width: 90%;
+        font-size: 16px;
+        line-height: 1.3em;
+    }
+
+    &__time{
+        display: flex;
+        justify-items: flex-end;
+        margin-left: 10px;
+        width: 50px;
+        font-size: 10px;
+        color: rgb(109 109 109);
+    }
+}
 
 .chatWindow{
     display: grid;
@@ -108,7 +153,7 @@
         display: grid;
         align-items: center;
         justify-content: center;
-}
+    }
 }
 
 .chooseChat{
@@ -123,3 +168,4 @@
         background-color: #fff;
     }
 }
+
