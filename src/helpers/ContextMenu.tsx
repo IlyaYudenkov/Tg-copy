@@ -5,8 +5,8 @@ import style from './Helpers.module.scss';
 
 const ContextMenu: FC = () => {
 
-    const removeMessage = (event: React.MouseEvent<HTMLDivElement>) => {
-        event.stopPropagation();
+    const removeMessage = (event:React.MouseEvent<HTMLDivElement>) => {
+      event.stopPropagation();
     };
 
     return (

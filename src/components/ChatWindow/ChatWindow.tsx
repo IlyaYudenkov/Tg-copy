@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import styles from '../../helpers/Helpers.module.scss';
 import style from './ChatWindow.module.scss';
 import ChatInput from '../ChatInput/ChatInput';
@@ -8,13 +8,12 @@ import { IChat, IUser } from '../../types/types';
 import { fetcher } from '../../helpers/fetcher';
 import Loader from '../../helpers/Loader';
 import { urlChats, urlUsers } from '../../url/url';
-import ContextMenu from '../../helpers/ContextMenu';
+import Message from '../Message/Message';
 
 
 
 const ChatWindow: FC = () => {
 
-  const [openContextMenu, setOpenContextMenu] = useState(false);
 
   const { chosenChat } = useTypedSelector(state => state.chosenChat);
 
@@ -33,16 +32,11 @@ const ChatWindow: FC = () => {
     </div>
   );
 
-  const openSideMenu = (event: React.MouseEvent<HTMLDivElement>) => {
-    event.stopPropagation();
-    event.preventDefault();
-    setOpenContextMenu(true);
-  };
 
 
   return (
 
-    <div className={chosenChat ? style.chatWindowActive : style.chatWindow} onClick={() => setOpenContextMenu(false)}>
+    <div className={chosenChat ? style.chatWindowActive : style.chatWindow}>
       <div className={chosenChat ? style.chatWindowActive__header : style.chatWindow__header}>
         <div className={style.header__person}>
           <div className={style.person__avatar}>{user && user.name.split(' ').map(name => name[0])}</div>
@@ -58,18 +52,10 @@ const ChatWindow: FC = () => {
       </div>
       <div className={chosenChat ? style.chatWindowActive__main : style.chatWindow__main}>
         <div className={style.main__chat}>
-          <div className={style.chat__messageUserTo} onContextMenu={openSideMenu}>
-            {openContextMenu && <ContextMenu />}
-            <div className={style.message__text}>{chat && chat.text}</div>
-            <div className={style.message__time}>{chat && chat.createdAt}</div>
-          </div>
-          <div className={style.chat__messageUserFrom}>
-            <div className={style.message__text}>{chat && chat.text}</div>
-            <div className={style.message__time}>{chat && chat.createdAt}</div>
-          </div>
+          {chat && user && <Message userTo={user.id} text={chat.text} date={chat.createdAt} userFrom={chat.userFrom}/>}
 
         </div>
-        <ChatInput />
+        <ChatInput userTo={user && user.id}/>
       </div>
     </div>
   );

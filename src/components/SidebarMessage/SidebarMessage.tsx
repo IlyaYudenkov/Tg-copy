@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { chatChoose } from '../../store/reducers/chosenChatReducer';
 
 
-const SidebarMessage: FC<IChat> = ({ id, userFrom, text, createdAt }) => {
+const SidebarMessage: FC<IChat> = ({ id, senderName, text, createdAt }) => {
 
   const dispatch = useDispatch();
 
@@ -15,10 +15,10 @@ const SidebarMessage: FC<IChat> = ({ id, userFrom, text, createdAt }) => {
 
   return (
     <div className={style.sidebarMessage} onClick={selectChat}>
-      <div className={style.sidebarMessage__avatar}>{userFrom && userFrom.split(' ').map(name => name[0])}</div>
+      <div className={style.sidebarMessage__avatar}>{senderName && senderName.split(' ').map(name => name[0])}</div>
       <div className={style.sidebarMessage__details}>
         <div className={style.details__top}>
-          <div className={style.top__name}>{userFrom ? userFrom : 'User name not found'}</div>
+          <div className={style.top__name}>{senderName ? senderName : 'User name not found'}</div>
           <div className={style.top__time}>{createdAt}</div>
         </div>
         <div className={style.details__bottom}>

@@ -4,13 +4,18 @@ import Telegram from './components/Telegram/Telegram';
 import LogInForm from './components/LogInForm/LogInForm';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
+
 function App() {
+
+  const userLoggedIn = localStorage.getItem('userLoggedIn');
+
   return (
     <BrowserRouter>
-      <div className="App">
+      <div className='App'>
         <Routes>
+          {userLoggedIn && <Route path='/telegram' element={<Telegram />}/>}
+
           <Route path='/' element={<LogInForm />} />
-          <Route path='/telegram' element={<Telegram />} />
         </Routes>
       </div>
     </BrowserRouter>

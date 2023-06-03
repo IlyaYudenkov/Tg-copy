@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { FC, useState } from 'react';
 import style from './LogInForm.module.scss';
 import {
@@ -11,6 +10,7 @@ import useSWR from 'swr';
 import { IUser } from '../../types/types';
 import { fetcher } from '../../helpers/fetcher';
 import { urlUsers } from '../../url/url';
+import { useNavigate } from 'react-router-dom';
 
 
 interface MyFormValues {
@@ -20,6 +20,9 @@ interface MyFormValues {
 
 
 const LogInForm: FC = () => {
+
+  const navigate = useNavigate();
+
   const initialValues: MyFormValues = { email: '', password: '' };
 
   const [correctData, setCorrectData] = useState(false);
@@ -35,8 +38,9 @@ const LogInForm: FC = () => {
 
           users && users.map(user => {
             if (user.email === values.email && user.password === values.password) {
-              window.location.assign('/telegram');
               setCorrectData(true);
+              localStorage.setItem('userLoggedIn', user.id);
+              navigate('/telegram');
               actions.resetForm();
             }
             else {

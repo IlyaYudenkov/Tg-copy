@@ -2,7 +2,8 @@ export interface IChat {
   id: string,
   userFrom: string ,
   text: string,
-  createdAt: string
+  createdAt: string,
+  senderName: string
 }
 
 
@@ -34,6 +35,12 @@ export interface IUser {
   password: string
 }
 
-
-
+export interface IFullChat{
+  id: string,
+  userFrom: string ,
+  text: string,
+  createdAt: string,
+  senderName: string,
+  senderId: string
+}
 

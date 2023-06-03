@@ -1,0 +1,44 @@
+.chat{
+    &__messageUserFrom{
+        position: relative;
+        display: inline-flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        justify-self: flex-end;
+        margin: 15px 0;
+        border-radius: 7px;
+        padding: 10px;
+        background: white;
+    }
+
+    &__messageUserTo{
+        position: relative;
+        display: inline-flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        justify-self: flex-start;
+        margin: 15px 0;
+        border-radius: 7px;
+        padding: 10px;
+        background: white;
+    }
+}
+
+
+
+
+.message{
+    &__text{
+        overflow-wrap: break-word;
+        font-size: 1.15rem;
+        line-height: 1.3em;
+    }
+
+    &__time{
+        display: flex;
+        justify-items: flex-end;
+        margin-left: 10px;
+        font-size: 0.71rem;
+        color: rgb(109 109 109);
+    }
+}

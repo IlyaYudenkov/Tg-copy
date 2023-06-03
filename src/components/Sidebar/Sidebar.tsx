@@ -8,7 +8,7 @@ import Loader from '../../helpers/Loader';
 import Error from '../../helpers/Error';
 import HeaderSearch from '../HeaderSearch/HeaderSearch';
 import useSWR from 'swr';
-import { IChat, IUser } from '../../types/types';
+import { IChat, IFullChat, IUser } from '../../types/types';
 import { fetcher } from '../../helpers/fetcher';
 import { urlChats, urlUsers } from '../../url/url';
 
@@ -21,19 +21,25 @@ const Sidebar: FC = () => {
   const { data: chats, error, isLoading } = useSWR<IChat[]>(urlChats, fetcher);
 
   const { data: users } = useSWR<IUser[]>(chats ? urlUsers : null, fetcher);
+console.log(chats);
+  const userOwner = localStorage.getItem('userLoggedIn');
 
+  const tmp: IFullChat[] = [];
 
-  //???
-  const filteredChats = chats && chats.filter(chat => {
-    users && users.map(user => {
-      if (user.id == chat.userFrom) {
-        chat.userFrom = user.name;
-      }
+  chats && chats.forEach(chat => {
+    users && users.forEach(user => {
+      tmp.push({ ...chat, senderName: user.name, senderId: user.id });
     });
-    return chat && chat.userFrom.toLowerCase().includes(searchInput.toLowerCase());
-
   });
-  ///
+
+
+  const fullChats = tmp.filter(mess => {
+    return mess.userFrom == mess.senderId;
+  });
+
+  const filteredChats = fullChats && fullChats.filter(mess => {
+    return mess.userFrom !== userOwner && mess.senderName.toLowerCase().includes(searchInput.toLowerCase());
+  });
 
 
   return (
@@ -47,7 +53,7 @@ const Sidebar: FC = () => {
         {!isLoading && filteredChats && !filteredChats.length ? <ChatsNotFound /> : null}
         {error && <Error />}
         {!isLoading ? filteredChats && filteredChats.map(chat =>
-          <SidebarMessage key={chat.id} id={chat.id} userFrom={chat.userFrom} text={chat.text} createdAt={chat.createdAt} />)
+          <SidebarMessage key={chat.id} senderName={chat.senderName} id={chat.id} text={chat.text} createdAt={chat.createdAt} userFrom={chat.userFrom}/>)
           : <Loader />}
       </div>
     </div>
