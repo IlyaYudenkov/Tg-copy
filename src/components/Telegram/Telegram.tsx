@@ -6,7 +6,6 @@ import style from './Telegram.module.scss';
 const Telegram: FC = () => {
 
 
-
   return (
     <div className={style.telegram}>
       <Sidebar />

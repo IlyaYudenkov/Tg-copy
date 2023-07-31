@@ -7,7 +7,7 @@ const chosenChatReducer = createSlice({
         chosenChat: null,
     },
     reducers: {
-        chatChoose: (state, action: PayloadAction<string>) => {
+        chatChoose: (state, action: PayloadAction<number>) => {
             state.chosenChat = action.payload;
         },
     }

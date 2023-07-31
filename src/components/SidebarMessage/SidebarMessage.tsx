@@ -5,12 +5,12 @@ import { useDispatch } from 'react-redux';
 import { chatChoose } from '../../store/reducers/chosenChatReducer';
 
 
-const SidebarMessage: FC<IChat> = ({ id, senderName, text, createdAt }) => {
+const SidebarMessage: FC<IChat> = ({ userFrom, senderName, text, createdAt }) => {
 
   const dispatch = useDispatch();
 
   const selectChat = () => {
-    dispatch(chatChoose(id));
+    dispatch(chatChoose(userFrom));
   };
 
   return (

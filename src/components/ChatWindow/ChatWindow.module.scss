@@ -72,6 +72,7 @@
 
 .main{
     &__chat{
+        position: relative;
         display: grid;
         align-items: flex-end;
         grid-area: chat;
@@ -85,8 +86,8 @@
     &__chatInput{
         display: grid;
         grid-area: input;
-        grid-template-areas: 'file input';
-        grid-template-columns: 0.05fr 0.95fr;
+        grid-template-areas: 'input';
+        grid-template-columns: 1fr;
         grid-template-rows:  minmax(50px, 70px);
         background-color: #fff;
     }

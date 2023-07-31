@@ -4,13 +4,14 @@ import styles from '../ChatWindow/ChatWindow.module.scss';
 import axios from 'axios';
 import { urlChats } from '../../url/url';
 
-interface ChatInputProps{
-  userTo: string | undefined
+
+interface ChatInputProps {
+  userTo: number | undefined;
+  onSend: () => void
 }
 
 
-
-const ChatInput: FC <ChatInputProps> = ({userTo}) => {
+const ChatInput: FC<ChatInputProps> = ({ userTo, onSend }) => {
   const [value, setValue] = useState<string>('');
 
   const changeTextArea = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -19,28 +20,26 @@ const ChatInput: FC <ChatInputProps> = ({userTo}) => {
 
   const sendMessage = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    if (value){
+    if (value) {
       axios.post(urlChats, {
         userFrom: localStorage.getItem('userLoggedIn'),
         userTo: userTo,
         text: value,
         createdAt: Date.now()
-      }
-      ),{ headers: {
-        'Content-Type': 'application/json'
-      }};
-          setValue('');
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
         }
-    };
-  
-
+      }).then(() => {
+        onSend();
+      });
+      setValue('');
+    }
+  };
 
   return (
     <form action='submit'>
       <div className={styles.main__chatInput}>
-        <div className={style.chatInput__file}>
-          <input type="file" />
-        </div>
         <div className={style.chatInput__input}>
           <textarea placeholder='Write a message...' value={value} onChange={changeTextArea} />
           <button onClick={sendMessage}>Send message</button>

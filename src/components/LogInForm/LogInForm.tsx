@@ -35,11 +35,10 @@ const LogInForm: FC = () => {
         initialValues={initialValues}
         validationSchema={LogInSchema}
         onSubmit={(values, actions) => {
-
           users && users.map(user => {
             if (user.email === values.email && user.password === values.password) {
               setCorrectData(true);
-              localStorage.setItem('userLoggedIn', user.id);
+              localStorage.setItem('userLoggedIn', String(user.id));
               navigate('/telegram');
               actions.resetForm();
             }

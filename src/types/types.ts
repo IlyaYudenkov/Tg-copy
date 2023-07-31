@@ -1,6 +1,7 @@
 export interface IChat {
-  id: string,
-  userFrom: string ,
+  id: number,
+  userFrom: number,
+  userTo: number,
   text: string,
   createdAt: string,
   senderName: string
@@ -21,7 +22,11 @@ export interface ChatsState {
 
 
 export interface ChosenChatState {
-  chosenChat: null | string,
+  chosenChat: null | number,
+}
+
+export interface ChosenMessageState {
+  chosenMessage: null | number,
 }
 
 export interface searchState {
@@ -29,18 +34,19 @@ export interface searchState {
 }
 
 export interface IUser {
-  id: string,
-  name: string ,
+  id: number,
+  name: string,
   email: string,
   password: string
 }
 
-export interface IFullChat{
-  id: string,
-  userFrom: string ,
+export interface IFullChat {
+  id: number,
+  userFrom: number,
+  userTo?: number,
   text: string,
   createdAt: string,
   senderName: string,
-  senderId: string
+  senderId: number
 }
 

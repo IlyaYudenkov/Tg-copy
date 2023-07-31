@@ -27,38 +27,24 @@
   ],
   "messages": [
     {
-      "id": 1,
+      "id": 2,
       "userFrom": "2",
       "userTo": 1,
-      "text": "Hello, how're you?",
-      "createdAt": "16.05.2023"
+      "text": "Hello",
+      "createdAt": "17.05.2023"
     },
     {
-      "id": 2,
+      "id": 3,
       "userFrom": "4",
       "userTo": 1,
       "text": "dasdasd?",
       "createdAt": "16.05.2023"
     },
     {
-      "id": 3,
-      "userFrom": "3",
-      "userTo": 1,
-      "text": "I'm Spider-man",
-      "createdAt": "16.05.2023"
-    },
-    {
-      "id": 4,
-      "userFrom": "4",
-      "userTo": 1,
-      "text": "dd",
-      "createdAt": "16.05.2023"
-    },
-    {
       "userFrom": "1",
-      "userTo": 4,
-      "text": "dsadsadsad",
-      "createdAt": 1685766730357,
+      "userTo": 2,
+      "text": "dsadsadasd",
+      "createdAt": 1690607649355,
       "id": 5
     }
   ]
