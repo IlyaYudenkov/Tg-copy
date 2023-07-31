@@ -2,13 +2,13 @@ import React, { FC } from 'react';
 import style from '../Sidebar/Sidebar.module.scss';
 import SidebarMessage from '../SidebarMessage/SidebarMessage';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import ChatsNotFound from '../../helpers/ChatsNotFound';
-import Loader from '../../helpers/Loader';
-import Error from '../../helpers/Error';
+import ChatsNotFound from '../../helpers/UI/ChatsNotFound';
 import useSWR from 'swr';
 import { IChat, IFullChat, IUser } from '../../types/types';
 import { fetcher } from '../../helpers/fetcher';
 import { urlChats, urlUsers } from '../../url/url';
+import Loader from '../../helpers/UI/Loader';
+import Error from '../../helpers/UI/Error';
 
 const SidebarMain:FC = ({}) => {
 

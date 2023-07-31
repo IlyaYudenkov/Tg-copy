@@ -31,3 +31,24 @@
         transition-duration: 0.3s;
     }
 }
+
+.Button{
+    margin: auto;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 10px;
+    width: 120px;
+    font-weight: 500;
+    font-size: 1.2rem;
+    color:#fff;
+    background-color: #229ED9;
+    transition-duration: 0.3s;
+    cursor: pointer;
+
+    &:active{
+        border: 1px solid #000;
+        color: #229ED9;
+        background-color: #fff;
+        transition-duration: 0.3s;
+    }
+}

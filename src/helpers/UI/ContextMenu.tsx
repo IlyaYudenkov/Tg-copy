@@ -1,8 +1,10 @@
 import React, { FC } from 'react';
 import style from './Helpers.module.scss';
 import axios from 'axios';
-import { urlChats } from '../url/url';
-import { useTypedSelector } from '../hooks/useTypedSelector';
+import { useDispatch } from 'react-redux';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { urlChats } from '../../url/url';
+import { modalErrorState } from '../../store/reducers/modalErrorReducer';
 
 
 interface ContextMenuProps {
@@ -14,6 +16,12 @@ interface ContextMenuProps {
 
 const ContextMenu: FC<ContextMenuProps> = ({ setOpenContextMenu, clientX, clientY, onRemove }) => {
 
+  const dispatch = useDispatch();
+
+  const openModalError = () => {
+      dispatch(modalErrorState(true));
+  };
+ 
   const { chosenMessage: id } = useTypedSelector(state => state.chosenMessage);
 
 
@@ -22,10 +30,9 @@ const ContextMenu: FC<ContextMenuProps> = ({ setOpenContextMenu, clientX, client
     event.stopPropagation();
     axios.delete(`${urlChats}/${id}`).then(() => {
       onRemove();
-    }).catch(() => {
-      alert('Choose message for delete');
-    });
+    }).catch(openModalError);
   };
+
 
 
   return (

@@ -1,5 +1,6 @@
 /* stylelint-disable declaration-block-no-redundant-longhand-properties */
 .telegram{
+    position: relative;
     display: grid;
     grid-template-areas: 'sidebar chatWindow';
     grid-template-columns: minmax(0.25fr) 0.75fr;

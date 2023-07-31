@@ -11,6 +11,7 @@ import { IUser } from '../../types/types';
 import { fetcher } from '../../helpers/fetcher';
 import { urlUsers } from '../../url/url';
 import { useNavigate } from 'react-router-dom';
+import Button from '../../helpers/UI/Button';
 
 
 interface MyFormValues {
@@ -56,7 +57,7 @@ const LogInForm: FC = () => {
             <FormInput label='Password' id='password' name='password' type='password' placeholder='Password' />
             {!correctData && !isSubmitting ? '' : <div className={style.formAlert}>Enter a correct data</div>}
 
-            {!error ? <button type="submit">Log in</button> : <div className={style.errorMessage}>{error.message}</div>}
+            {!error ? <Button text='Log in'/> : <div className={style.errorMessage}>{error.message}</div>}
           </Form>
         )
         }

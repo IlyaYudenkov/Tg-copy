@@ -1,15 +1,16 @@
 import React, { FC } from 'react';
-import styles from '../../helpers/Helpers.module.scss';
+import styles from '../../helpers/UI/Helpers.module.scss';
 import style from './ChatWindow.module.scss';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import useSWR from 'swr';
 import { IChat, IUser } from '../../types/types';
 import { fetcher } from '../../helpers/fetcher';
-import Loader from '../../helpers/Loader';
 import { urlChats, urlUsers } from '../../url/url';
 import ChatWindowChooseChat from '../ChatWindowChooseChat/ChatWindowChooseChat';
 import ChatWindowMain from '../ChatWindowMain/ChatWindowMain';
 import ChatWindowHeader from '../ChatWindowHeader/ChatWindowHeader';
+import Loader from '../../helpers/UI/Loader';
+
 
 
 const ChatWindow: FC = () => {
@@ -24,7 +25,7 @@ const ChatWindow: FC = () => {
 
   const { data: user } = useSWR<IUser>(chat ? urlUser : null, fetcher);
 
-
+ 
   if (isLoading) return (
     <div className={styles.helpersChatWindow}>
       <Loader />
