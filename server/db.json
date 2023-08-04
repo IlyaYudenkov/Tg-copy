@@ -27,25 +27,32 @@
   ],
   "messages": [
     {
-      "id": 2,
-      "userFrom": "2",
-      "userTo": 1,
-      "text": "Hello",
-      "createdAt": "17.05.2023"
-    },
-    {
-      "id": 3,
       "userFrom": "4",
       "userTo": 1,
-      "text": "dasdasd?",
-      "createdAt": "16.05.2023"
+      "text": "dsdsdsds",
+      "createdAt": 1691156545272,
+      "id": 8
     },
     {
-      "userFrom": "1",
-      "userTo": 4,
-      "text": "dsdasdsadsad",
-      "createdAt": 1690807798016,
-      "id": 7
+      "userFrom": "4",
+      "userTo": 1,
+      "text": "dsdsdsds",
+      "createdAt": 1691156545272,
+      "id": 8
+    },
+    {
+      "userFrom": "4",
+      "userTo": 1,
+      "text": "dsdsdsds",
+      "createdAt": 1691156545272,
+      "id": 8
+    },
+    {
+      "userFrom": "4",
+      "userTo": 1,
+      "text": "dsdsdsds",
+      "createdAt": 1691156545272,
+      "id": 8
     }
   ]
 }

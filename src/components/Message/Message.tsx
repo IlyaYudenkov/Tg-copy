@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import style from './Message.module.scss';
 import { useDispatch } from 'react-redux';
-import { messageChoose } from '../../store/reducers/chosenMessageReducer';
+import { messageChooseId, messageChooseUserFrom } from '../../store/reducers/chosenMessageReducer';
 
 interface MessageProps {
   id: number,
@@ -16,7 +16,8 @@ const Message: FC<MessageProps> = ({ text, date, userFrom, id }) => {
   const dispatch = useDispatch();
 
   const selectMessage = () => {
-    dispatch(messageChoose(id));
+    dispatch(messageChooseId(id));
+    dispatch(messageChooseUserFrom(userFrom));
   };
 
   return (

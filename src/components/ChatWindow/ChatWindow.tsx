@@ -16,16 +16,20 @@ import Loader from '../../helpers/UI/Loader';
 const ChatWindow: FC = () => {
 
   const { chosenChat: userFrom } = useTypedSelector(state => state.chosenChat);
+  const urlChatFrom = `${urlChats}?userFrom=${userFrom}`;
+  const urlChatTo = `${urlChats}?userTo=${userFrom}`;
 
-  const urlChat = `${urlChats}?userTo=${userFrom}`;
-
-  const { data: chat, isLoading, mutate } = useSWR<IChat[]>(userFrom ? urlChat : null, fetcher);
+  const { data: chat, isLoading } = useSWR<IChat[]>(userFrom ? urlChatFrom : null, fetcher);
+  const { data: chatTo, mutate } = useSWR<IChat[]>(userFrom ? urlChatTo : null, fetcher);
 
   const urlUser = `${urlUsers}/${userFrom}`;
 
   const { data: user } = useSWR<IUser>(chat ? urlUser : null, fetcher);
 
- 
+  const genChat = [];
+  genChat.push(chat, chatTo);
+
+
   if (isLoading) return (
     <div className={styles.helpersChatWindow}>
       <Loader />
@@ -37,7 +41,7 @@ const ChatWindow: FC = () => {
     <div className={userFrom ? style.chatWindowActive : style.chatWindow} >
       <ChatWindowHeader userFrom={userFrom && userFrom} user={user && user} />
       <ChatWindowChooseChat userFrom={userFrom && userFrom} />
-      <ChatWindowMain userFrom={userFrom && userFrom} chat={chat} mutateChat={() => mutate()} user={user && user} />
+      <ChatWindowMain userFrom={userFrom && userFrom} chatFrom={genChat[0]} chatTo={genChat[1]} mutateChatFrom={() => mutate()} user={user && user} />
     </div>
   );
 };

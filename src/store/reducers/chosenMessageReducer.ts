@@ -4,15 +4,19 @@ import { ChosenMessageState } from '../../types/types';
 const chosenMessageReducer = createSlice({
     name: 'chosenMessage',
     initialState: <ChosenMessageState>{
-        chosenMessage: null,
+        chosenMessageId: null,
+        chosenMessageUserFrom: null
     },
     reducers: {
-        messageChoose: (state, action: PayloadAction<number>) => {
-            state.chosenMessage = action.payload;
+        messageChooseId: (state, action: PayloadAction<number>) => {
+            state.chosenMessageId = action.payload;
+        },
+        messageChooseUserFrom: (state, action: PayloadAction<number>) => {
+            state.chosenMessageUserFrom = action.payload;
         },
     }
 
 });
 
 export default chosenMessageReducer.reducer;
-export const { messageChoose } = chosenMessageReducer.actions;
+export const { messageChooseId, messageChooseUserFrom } = chosenMessageReducer.actions;

@@ -9,7 +9,7 @@ const chosenChatReducer = createSlice({
     reducers: {
         chatChoose: (state, action: PayloadAction<number>) => {
             state.chosenChat = action.payload;
-        },
+        }
     }
 
 });

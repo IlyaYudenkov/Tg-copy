@@ -14,13 +14,14 @@ const dispatch = useDispatch();
 const closeModalError = () => {
     dispatch(modalErrorState(false));
 };
+const {textError} = useTypedSelector(state => state.modalError);
 
 
  return (
    <div className={openError ? cls.modalWindow : cls.modalWindowNone} onClick={closeModalError}>
      <div className={cls.modalWindow__window} onClick={e => e.stopPropagation()}>
        <div className={cls.window__content}>
-         <h1>Choose a message for delete</h1>
+         <h1>{textError}</h1>
          <Button text='Got it' isModal/>
        </div>
      </div>

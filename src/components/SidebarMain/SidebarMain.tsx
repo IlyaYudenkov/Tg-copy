@@ -9,26 +9,26 @@ import { fetcher } from '../../helpers/fetcher';
 import { urlChats, urlUsers } from '../../url/url';
 import Loader from '../../helpers/UI/Loader';
 import Error from '../../helpers/UI/Error';
+import { userOwner } from '../../helpers/userOwner';
 
 const SidebarMain:FC = ({}) => {
 
     const { searchInput } = useTypedSelector(state => state.searchChats);
 
-    const userOwner = localStorage.getItem('userLoggedIn');
+    
     const { data: chats, error, isLoading } = useSWR<IChat[]>(urlChats + `?userTo=${userOwner}`, fetcher);
     const { data: users } = useSWR<IUser[]>(chats ? urlUsers : null, fetcher);
-  
+
     const tmp: IFullChat[] = [];
+    
   
     chats && chats.forEach(chat => {
       users && users.forEach(user => {
         return tmp.push({ ...chat, senderName: user.name, senderId: user.id });
       });
     });
-  
-    const fullChats = tmp.filter(mess => {
-      return mess.userFrom == mess.senderId;
-    });
+
+    const fullChats = tmp.filter(mess => mess.userFrom == mess.senderId);
   
     const filteredChats = fullChats && fullChats.filter(mess => {
       return String(mess.userFrom) !== userOwner && mess.senderName.toLowerCase().includes(searchInput.toLowerCase());
@@ -50,6 +50,7 @@ const SidebarMain:FC = ({}) => {
           return false;
         }
       }
+
     });
 
  return (
