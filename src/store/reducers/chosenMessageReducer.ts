@@ -5,7 +5,8 @@ const chosenMessageReducer = createSlice({
     name: 'chosenMessage',
     initialState: <ChosenMessageState>{
         chosenMessageId: null,
-        chosenMessageUserFrom: null
+        chosenMessageUserFrom: null,
+        chosenMessageRef: null
     },
     reducers: {
         messageChooseId: (state, action: PayloadAction<number>) => {
@@ -13,7 +14,7 @@ const chosenMessageReducer = createSlice({
         },
         messageChooseUserFrom: (state, action: PayloadAction<number>) => {
             state.chosenMessageUserFrom = action.payload;
-        },
+        }
     }
 
 });

@@ -27,7 +27,7 @@ export interface ChosenChatState {
 
 export interface ChosenMessageState {
   chosenMessageId: null | number,
-  chosenMessageUserFrom: null | number,
+  chosenMessageUserFrom: null | number
 }
 
 export interface searchState {

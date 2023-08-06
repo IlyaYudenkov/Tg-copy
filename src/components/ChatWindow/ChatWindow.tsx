@@ -19,15 +19,17 @@ const ChatWindow: FC = () => {
   const urlChatFrom = `${urlChats}?userFrom=${userFrom}`;
   const urlChatTo = `${urlChats}?userTo=${userFrom}`;
 
-  const { data: chat, isLoading } = useSWR<IChat[]>(userFrom ? urlChatFrom : null, fetcher);
-  const { data: chatTo, mutate } = useSWR<IChat[]>(userFrom ? urlChatTo : null, fetcher);
+  const { data: chatFrom, isLoading, mutate: mutateChatFrom } = useSWR<IChat[]>(userFrom ? urlChatFrom : null, fetcher);
+  const { data: chatTo, mutate: mutateChatTo } = useSWR<IChat[]>(userFrom ? urlChatTo : null, fetcher);
+
 
   const urlUser = `${urlUsers}/${userFrom}`;
 
-  const { data: user } = useSWR<IUser>(chat ? urlUser : null, fetcher);
+  const { data: user } = useSWR<IUser>(chatFrom ? urlUser : null, fetcher);
 
-  const genChat = [];
-  genChat.push(chat, chatTo);
+  const genChat = chatTo && chatFrom && chatFrom.concat(chatTo);
+
+  const sortedChat = genChat && genChat.sort((chat1: IChat, chat2: IChat) => chat1.id > chat2.id ? 1 : -1);
 
 
   if (isLoading) return (
@@ -41,7 +43,7 @@ const ChatWindow: FC = () => {
     <div className={userFrom ? style.chatWindowActive : style.chatWindow} >
       <ChatWindowHeader userFrom={userFrom && userFrom} user={user && user} />
       <ChatWindowChooseChat userFrom={userFrom && userFrom} />
-      <ChatWindowMain userFrom={userFrom && userFrom} chatFrom={genChat[0]} chatTo={genChat[1]} mutateChatFrom={() => mutate()} user={user && user} />
+      <ChatWindowMain userFrom={userFrom && userFrom} sortedChat={sortedChat} mutateChatTo={() => mutateChatTo()} mutateChatFrom={() => mutateChatFrom()} user={user && user} />
     </div>
   );
 };

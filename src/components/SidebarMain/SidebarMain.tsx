@@ -20,7 +20,6 @@ const SidebarMain:FC = ({}) => {
     const { data: users } = useSWR<IUser[]>(chats ? urlUsers : null, fetcher);
 
     const tmp: IFullChat[] = [];
-    
   
     chats && chats.forEach(chat => {
       users && users.forEach(user => {
@@ -29,7 +28,7 @@ const SidebarMain:FC = ({}) => {
     });
 
     const fullChats = tmp.filter(mess => mess.userFrom == mess.senderId);
-  
+
     const filteredChats = fullChats && fullChats.filter(mess => {
       return String(mess.userFrom) !== userOwner && mess.senderName.toLowerCase().includes(searchInput.toLowerCase());
     });
