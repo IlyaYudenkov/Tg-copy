@@ -1,13 +1,12 @@
 import React, { FC } from 'react';
-import { Navigate, Route } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
-const ProtectedRoute: FC<{condition: boolean, element: React.ReactNode, path: string}> = ({ condition, element, path }) => {
+const ProtectedRoute: FC<{condition: boolean, children: React.ReactElement}> = ({ condition, children }) => {
     
     if (!condition) {
       return <Navigate to="/" replace />;
     }
-  
-    return <Route path={path} element={element}/>;
+    return children;
   };
 
 export {ProtectedRoute};

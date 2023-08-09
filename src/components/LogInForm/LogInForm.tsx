@@ -29,6 +29,9 @@ const LogInForm: FC = () => {
   const [correctData, setCorrectData] = useState(false);
 
   const { data: users, error } = useSWR<IUser[]>(urlUsers, fetcher);
+
+
+
   return (
     <div>
       <h1 className={style.h1}>Autorization</h1>
@@ -56,8 +59,8 @@ const LogInForm: FC = () => {
 
             <FormInput label='Password' id='password' name='password' type='password' placeholder='Password' />
             {!correctData && !isSubmitting ? '' : <div className={style.formAlert}>Enter a correct data</div>}
-
-            {!error ? <Button text='Log in'/> : <div className={style.errorMessage}>{error.message}</div>}
+        
+            {!error ? <Button text='Log in' /> : <div className={style.errorMessage}>{error.message}</div>}
           </Form>
         )
         }

@@ -3,16 +3,23 @@ import './styles/App.css';
 import Telegram from './components/Telegram/Telegram';
 import LogInForm from './components/LogInForm/LogInForm';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { ProtectedRoute } from './helpers/ProtectedRoute';
 
 
 function App() {
+
 
   return (
     <BrowserRouter>
       <div className='App'>
         <Routes>
-          {localStorage.getItem('userLoggedIn') ? <Route path='/telegram' element={<Telegram />}/> : <Route path="*" element={<Navigate to="/" />} />}
-          <Route path='/' element={<LogInForm />} />         
+          <Route path='/telegram' element={
+            <ProtectedRoute condition={localStorage.getItem('userLoggedIn') ? true : false}>
+              <Telegram/>
+            </ProtectedRoute>} />
+
+          <Route path='/' element={<LogInForm />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
     </BrowserRouter>

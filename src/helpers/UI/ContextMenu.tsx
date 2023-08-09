@@ -37,7 +37,6 @@ const ContextMenu: FC<ContextMenuProps> = ({ setOpenContextMenu, clientX, client
   const [userFromState, setUserFromState] = useState(userFrom);
   const removeMessage = (event: React.MouseEvent<HTMLDivElement>) => {
     setUserFromState(userFrom);
-    console.log(userFromState);
     if (userFrom == userOwner || userFrom == null && id) {
       setOpenContextMenu(false);
       event.stopPropagation();
@@ -51,7 +50,7 @@ const ContextMenu: FC<ContextMenuProps> = ({ setOpenContextMenu, clientX, client
       openModalErrorNotYourMessage();
     }
     setUserFromState(0);
-    console.log(userFromState);
+
   };
 
 
