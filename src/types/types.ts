@@ -48,6 +48,7 @@ export interface IFullChat {
   text: string,
   createdAt: string,
   senderName: string,
-  senderId: number
+  senderId: number,
+  recipient?: string | undefined
 }
 
