@@ -15,19 +15,20 @@ import Loader from '../../helpers/UI/Loader';
 
 const ChatWindow: FC = () => {
 
-  const { chosenChat: userFrom } = useTypedSelector(state => state.chosenChat);
-  const urlChatFrom = `${urlChats}?userFrom=${userFrom}`;
-  const urlChatTo = `${urlChats}?userTo=${userFrom}`;
+  const { chosenChatUserFrom: userFrom } = useTypedSelector(state => state.chosenChat);
+  const { chosenChatUserTo: userTo } = useTypedSelector(state => state.chosenChat);
 
-  const { data: chatFrom, isLoading, mutate: mutateChatFrom } = useSWR<IChat[]>(userFrom ? urlChatFrom : null, fetcher);
-  const { data: chatTo, mutate: mutateChatTo } = useSWR<IChat[]>(userFrom ? urlChatTo : null, fetcher);
+  const urlChatPartOne = `${urlChats}?userFrom=${userFrom}&&userTo=${userTo}`;
+  const urlChatPartTwo = `${urlChats}?userTo=${userFrom}&&userFrom=${userTo}`;
 
+  const { data: chatPartOne, isLoading, mutate: mutateChatFrom } = useSWR<IChat[]>(userFrom ? urlChatPartOne : null, fetcher);
+  const { data: chatPartTwo, mutate: mutateChatTo } = useSWR<IChat[]>(userTo ? urlChatPartTwo : null, fetcher);
 
-  const urlUser = `${urlUsers}/${userFrom}`;
+  const urlUser = `${urlUsers}/${userTo}`;
 
-  const { data: user } = useSWR<IUser>(chatFrom ? urlUser : null, fetcher);
+  const { data: user } = useSWR<IUser>(chatPartOne ? urlUser : null, fetcher);
 
-  const genChat = chatTo && chatFrom && chatFrom.concat(chatTo);
+  const genChat = chatPartTwo && chatPartOne && chatPartOne.concat(chatPartTwo);
 
   const sortedChat = genChat && genChat.sort((chat1: IChat, chat2: IChat) => chat1.id > chat2.id ? 1 : -1);
 
@@ -41,9 +42,9 @@ const ChatWindow: FC = () => {
   return (
 
     <div className={userFrom ? style.chatWindowActive : style.chatWindow} >
-      <ChatWindowHeader userFrom={userFrom && userFrom} user={user && user} />
-      <ChatWindowChooseChat userFrom={userFrom && userFrom} />
-      <ChatWindowMain userFrom={userFrom && userFrom} sortedChat={sortedChat} mutateChatTo={() => mutateChatTo()} mutateChatFrom={() => mutateChatFrom()} user={user && user} />
+      <ChatWindowHeader user={user && user} />
+      <ChatWindowChooseChat userTo={userTo && userTo} />
+      <ChatWindowMain userTo={userTo && userTo} sortedChat={sortedChat} mutateChatTo={() => mutateChatTo()} mutateChatFrom={() => mutateChatFrom()} user={user && user} />
     </div>
   );
 };

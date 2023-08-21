@@ -4,7 +4,7 @@ import SidebarMessage from '../SidebarMessage/SidebarMessage';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import ChatsNotFound from '../../helpers/UI/ChatsNotFound';
 import useSWR from 'swr';
-import { IChat, IChats, IFullChat, IUser } from '../../types/types';
+import { IChat, IFullChat, IUser } from '../../types/types';
 import { fetcher } from '../../helpers/fetcher';
 import { urlChats, urlUsers } from '../../url/url';
 import Loader from '../../helpers/UI/Loader';
@@ -16,107 +16,85 @@ const SidebarMain: FC = ({ }) => {
   const { searchInput } = useTypedSelector(state => state.searchChats);
 
 
-  const { data: chats, error, isLoading } = useSWR<IChat[]>(urlChats + `?userTo=${userOwner}`, fetcher);
-  const { data: users } = useSWR<IUser[]>(chats ? urlUsers : null, fetcher);
+  const { data: chatsFrom, isLoading, error } = useSWR<IChat[]>(urlChats + `?userFrom=${userOwner}`, fetcher);
+  const { data: chatsTo } = useSWR<IChat[]>(urlChats + `?userTo=${userOwner}`, fetcher);
 
-  const { data: chat1 } = useSWR<IChat[]>(urlChats, fetcher);
+  const { data: users } = useSWR<IUser[]>(chatsFrom ? urlUsers : null, fetcher);
 
   const sortChatsId = (a: IChat, b: IChat) => b.id - a.id;
 
   const sortsChatUserFrom = (a: IChat, b: IChat) => a.userFrom - b.userFrom;
 
-  const tmp: IChat[] = [];
+  const tmpSortedChats: IChat[] = [];
 
-
-  if (users && chat1) {
-    chat1 && chat1.sort(sortChatsId);
-    console.log(chat1);
-    for (let i = 0; i <= users.length; i++) {
-   
-      (chat1.find(chat => chat.userFrom == i ? tmp.push(chat) : ''));
+  if (users && chatsFrom && chatsTo) {
+    chatsFrom && chatsFrom.sort(sortChatsId);
+    chatsTo && chatsTo.sort(sortChatsId);
+    for (let i = 1; i <= users.length; i++) {
+      (chatsTo.find(chatTo => chatTo.userFrom == i && tmpSortedChats.push(chatTo)));
+      (chatsFrom.find(chatFrom => chatFrom.userTo == i && tmpSortedChats.push(chatFrom)));
     }
   }
 
-tmp && tmp.sort(sortsChatUserFrom);
-  console.log(tmp);
- /* for (let i = 0; i <= tmp.length; i++) {
-    if (tmp[i + 2] && tmp[i].userFrom == tmp[i + 2].userTo && tmp[i].userTo == tmp[i + 2].userFrom) {
-      tmp[i].id < tmp[i + 2].id ? tmp.splice(i, 1) : tmp.splice(i + 2, 1);
-    }
-    tmp;
- 
-  }*/
-/*if(users && tmp){
-  for (let i = 0; i <= tmp.length; i++) {
-    console.log(i);
-    for (let n = 1; n <= users.length; n++) {
-      console.log(tmp[n].userTo);
-      if(tmp[i].userFrom == tmp[n].userTo || tmp[i].userTo == tmp[n].userFrom){
-        tmp[i].id < tmp[n].id ? tmp.splice(i, 1) : tmp.splice(n, 1);
-        console.log(1);
-      }
-    }    
+  tmpSortedChats && tmpSortedChats.sort(sortsChatUserFrom);
+
+
+  let finalSortedChats: IChat[] = [];
+  const sortedChats: IChat[] = [];
+
+  if (tmpSortedChats.length >= 1) {
+    tmpSortedChats && tmpSortedChats.forEach(chat => {
+      tmpSortedChats && tmpSortedChats.forEach(chat1 => {
+        if (chat.userFrom == chat1.userTo && chat.userTo == chat1.userFrom) {
+          sortedChats.push(chat.id < chat1.id ? chat1 : chat);
+        }
+        finalSortedChats = [...new Set(sortedChats)];
+      });
+    });
   }
-}*/
-let n:IChat[] = [];
-tmp && tmp.forEach(chat => {
-  tmp && tmp.forEach(chat1 => {
-    if(chat.userFrom == chat1.userTo && chat.userTo == chat1.userFrom){
-      console.log(chat, chat1);
-      chat.id < chat1.id ? n=tmp.filter(mess => mess.id !== chat.id) : n=tmp.filter(mess => mess.id !== chat1.id);
-    }
-  });
-});
-  
-  console.log(n);
-  const lastMess: IFullChat[] = [];
-  chat1 && chat1.forEach(chat => {
+  else {
+    finalSortedChats = sortedChats.concat(tmpSortedChats);
+  }
+
+  const lastMessChats: IFullChat[] = [];
+  finalSortedChats && finalSortedChats.forEach(chat => {
     users && users.forEach(user => {
-
-      return lastMess.push({ ...chat, senderName: user.name, recipient: users[chat.userTo - 1].name, senderId: user.id });
+      return lastMessChats.push({ ...chat, senderName: user.name, recipient: users[chat.userTo - 1].name, senderId: user.id });
     });
   });
 
-  console.log(lastMess);
-  /* const tmp: IFullChat[] = [];
- 
-   chats && chats.forEach(chat => {
-     users && users.forEach(user => {
-       return tmp.push({ ...chat, senderName: user.name, senderId: user.id });
-     });
-   });*/
 
-  const fullChats = lastMess.filter(mess => mess.userFrom == mess.senderId);
+  const fullChats = lastMessChats.filter(mess => mess.userFrom == mess.senderId);
 
   const filteredChats = fullChats && fullChats.filter(mess => {
-    return mess.senderName.toLowerCase().includes(searchInput.toLowerCase());
+    return String(mess.senderId) != userOwner ? mess.senderName.toLowerCase().includes(searchInput.toLowerCase()) : mess.recipient!.toLowerCase().includes(searchInput.toLowerCase());
   });
 
   const lastDateByUserFrom: Record<string, string> = {
   };
 
-  const filteredMessages: IFullChat[] = filteredChats.filter((message) => {
-    if (!lastDateByUserFrom[message.userFrom]) {
-      lastDateByUserFrom[message.userFrom] = message.createdAt;
-      return true;
-    } else {
-      const lastDate = lastDateByUserFrom[message.userFrom];
-      if (message.createdAt > lastDate) {
-        lastDateByUserFrom[message.userFrom] = message.createdAt;
-        return true;
-      } else {
-        return false;
-      }
-    }
-
-  });
+  /* const filteredMessages: IFullChat[] = filteredChats.filter((message) => {
+     if (!lastDateByUserFrom[message.userFrom]) {
+       lastDateByUserFrom[message.userFrom] = message.createdAt;
+       return true;
+     } else {
+       const lastDate = lastDateByUserFrom[message.userFrom];
+       if (message.createdAt > lastDate) {
+         lastDateByUserFrom[message.userFrom] = message.createdAt;
+         return true;
+       } else {
+         return false;
+       }
+     }
+ 
+   });*/
 
   return (
     <div className={style.sidebar__main}>
-      {!isLoading && filteredMessages && !filteredChats.length ? <ChatsNotFound /> : null}
+      {!isLoading && filteredChats && !filteredChats.length ? <ChatsNotFound /> : null}
       {error && <Error />}
-      {!isLoading ? filteredChats && filteredMessages.map(chat =>
-        <SidebarMessage key={chat.id} senderName={chat.senderName} id={chat.id} text={chat.text} createdAt={chat.createdAt} userFrom={chat.userFrom} userTo={chat.userTo as number} />)
+      {!isLoading ? filteredChats && filteredChats.map(chat =>
+        <SidebarMessage key={chat.id} senderName={String(chat.userFrom) !== userOwner ? chat.senderName : chat.recipient!} id={chat.id} text={chat.text} createdAt={chat.createdAt} userFrom={String(chat.userFrom) == userOwner ? chat.userFrom : chat.userTo!} userTo={String(chat.userTo) == userOwner ? chat.userFrom : chat.userTo!} />)
         : <Loader />}
     </div>
   );

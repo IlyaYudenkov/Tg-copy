@@ -3,14 +3,14 @@ import style from '../ChatWindow/ChatWindow.module.scss';
 
 
 interface ChatWindowChooseChatProps {
-  userFrom: number | null
+  userTo: number | null
 }
 
 
-const ChatWindowChooseChat: FC<ChatWindowChooseChatProps> = ({ userFrom }) => {
+const ChatWindowChooseChat: FC<ChatWindowChooseChatProps> = ({ userTo }) => {
 
   return (
-    <div className={userFrom ? style.chatWindowActive__chooseChat : style.chatWindow__chooseChat}>
+    <div className={userTo ? style.chatWindowActive__chooseChat : style.chatWindow__chooseChat}>
       <div className={style.chooseChat__text}>Choose a chat</div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState, FC, useEffect } from 'react';
+import React, { useState, FC, useMemo } from 'react';
 import style from '../ChatWindow/ChatWindow.module.scss';
 import ChatInput from '../ChatInput/ChatInput';
 import Message from '../Message/Message';
@@ -7,7 +7,7 @@ import ContextMenu from '../../helpers/UI/ContextMenu';
 
 
 interface ChatWindowMainProps {
-  userFrom: number | null,
+  userTo: number | null,
   sortedChat: IChat[] | undefined,
   user: IUser | undefined,
   mutateChatTo: () => void,
@@ -15,9 +15,9 @@ interface ChatWindowMainProps {
 
 }
 
-const ChatWindowMain: FC<ChatWindowMainProps> = ({ userFrom, user, sortedChat, mutateChatTo, mutateChatFrom }) => {
+const ChatWindowMain: FC<ChatWindowMainProps> = ({ userTo, user, sortedChat, mutateChatTo, mutateChatFrom }) => {
 
-  useEffect(() => { () => mutateChatFrom(); }, [sortedChat]);
+  useMemo(() => { () => mutateChatTo(); }, [sortedChat]);
 
   const [openContextMenu, setOpenContextMenu] = useState(false);
 
@@ -53,13 +53,13 @@ const ChatWindowMain: FC<ChatWindowMainProps> = ({ userFrom, user, sortedChat, m
   };
 
   return (
-    <div className={userFrom ? style.chatWindowActive__main : style.chatWindow__main} onClick={() => setOpenContextMenu(false)}>
-      {openContextMenu && sortedChat && <ContextMenu onRemove={() => { mutateChatTo(); }} setOpenContextMenu={setOpenContextMenu} clientX={coordinatesX.clientX} clientY={coordinatesY.clientY} />}
+    <div className={userTo ? style.chatWindowActive__main : style.chatWindow__main} onClick={() => setOpenContextMenu(false)}>
+      {openContextMenu && sortedChat && <ContextMenu onRemove={() => { mutateChatFrom(); }} setOpenContextMenu={setOpenContextMenu} clientX={coordinatesX.clientX} clientY={coordinatesY.clientY} />}
       <div className={style.main__chat} onContextMenu={openSideMenu}>
 
         {sortedChat && sortedChat.map(message => <Message key={message.id} id={message.id} userTo={message.userTo} text={message.text} date={message.createdAt} userFrom={message.userFrom} />)}
       </div>
-      <ChatInput userTo={user && user.id} onSend={() => { mutateChatTo(); }} />
+      <ChatInput userTo={user && user.id} onSend={() => { mutateChatFrom(); }} />
     </div>
   );
 };

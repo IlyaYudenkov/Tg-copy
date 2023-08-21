@@ -4,15 +4,19 @@ import { ChosenChatState } from '../../types/types';
 const chosenChatReducer = createSlice({
     name: 'chosenChat',
     initialState: <ChosenChatState>{
-        chosenChat: null,
+        chosenChatUserFrom: null,
+        chosenChatUserTo: null
     },
     reducers: {
-        chatChoose: (state, action: PayloadAction<number>) => {
-            state.chosenChat = action.payload;
+        chatUserFromChoose: (state, action: PayloadAction<number>) => {
+            state.chosenChatUserFrom = action.payload;
+        },
+        chatUserToChoose: (state, action: PayloadAction<number>) => {
+            state.chosenChatUserTo = action.payload;
         }
     }
 
 });
 
 export default chosenChatReducer.reducer;
-export const { chatChoose } = chosenChatReducer.actions;
+export const { chatUserFromChoose, chatUserToChoose } = chosenChatReducer.actions;

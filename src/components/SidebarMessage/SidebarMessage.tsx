@@ -2,17 +2,17 @@ import React, { FC } from 'react';
 import style from './SidebarMessage.module.scss';
 import { IChat } from '../../types/types';
 import { useDispatch } from 'react-redux';
-import { chatChoose } from '../../store/reducers/chosenChatReducer';
+import { chatUserFromChoose, chatUserToChoose } from '../../store/reducers/chosenChatReducer';
 
 
-const SidebarMessage: FC<IChat> = ({ userFrom, senderName, text, createdAt }) => {
+const SidebarMessage: FC<IChat> = ({ userFrom, senderName, text, createdAt, userTo }) => {
 
   const dispatch = useDispatch();
 
   const selectChat = () => {
-    dispatch(chatChoose(userFrom));
+    dispatch(chatUserFromChoose(userFrom));
+    dispatch(chatUserToChoose(userTo));
   };
-
   return (
     <div className={style.sidebarMessage} onClick={selectChat}>
       <div className={style.sidebarMessage__avatar}>{senderName && senderName.split(' ').map(name => name[0])}</div>

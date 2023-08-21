@@ -22,7 +22,8 @@ export interface ChatsState {
 
 
 export interface ChosenChatState {
-  chosenChat: null | number,
+  chosenChatUserFrom: null | number,
+  chosenChatUserTo: null | number,
 }
 
 export interface ChosenMessageState {
