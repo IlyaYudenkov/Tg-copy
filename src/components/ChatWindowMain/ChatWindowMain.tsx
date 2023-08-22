@@ -6,6 +6,7 @@ import { IChat, IUser } from '../../types/types';
 import ContextMenu from '../../helpers/UI/ContextMenu';
 
 
+
 interface ChatWindowMainProps {
   userTo: number | null,
   sortedChat: IChat[] | undefined,
@@ -17,12 +18,13 @@ interface ChatWindowMainProps {
 
 const ChatWindowMain: FC<ChatWindowMainProps> = ({ userTo, user, sortedChat, mutateChatTo, mutateChatFrom }) => {
 
-  useMemo(() => { () => mutateChatTo(); }, [sortedChat]);
+  useMemo(() => { mutateChatTo(); }, [sortedChat]);
 
   const [openContextMenu, setOpenContextMenu] = useState(false);
 
   const [coordinatesX, setCoordinatesX] = useState({ clientX: 0 });
   const [coordinatesY, setCoordinatesY] = useState({ clientY: 0 });
+
 
   const openSideMenu = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -53,13 +55,13 @@ const ChatWindowMain: FC<ChatWindowMainProps> = ({ userTo, user, sortedChat, mut
   };
 
   return (
-    <div className={userTo ? style.chatWindowActive__main : style.chatWindow__main} onClick={() => setOpenContextMenu(false)}>
+    <div  className={userTo ? style.chatWindowActive__main : style.chatWindow__main} onClick={() => setOpenContextMenu(false)} >
       {openContextMenu && sortedChat && <ContextMenu onRemove={() => { mutateChatFrom(); }} setOpenContextMenu={setOpenContextMenu} clientX={coordinatesX.clientX} clientY={coordinatesY.clientY} />}
       <div className={style.main__chat} onContextMenu={openSideMenu}>
 
         {sortedChat && sortedChat.map(message => <Message key={message.id} id={message.id} userTo={message.userTo} text={message.text} date={message.createdAt} userFrom={message.userFrom} />)}
       </div>
-      <ChatInput userTo={user && user.id} onSend={() => { mutateChatFrom(); }} />
+      <ChatInput userTo={user && user.id} onSend={() => { mutateChatFrom(); }}/>
     </div>
   );
 };

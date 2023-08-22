@@ -14,10 +14,11 @@ interface ChatInputProps {
 const ChatInput: FC<ChatInputProps> = ({ userTo, onSend }) => {
   const [value, setValue] = useState<string>('');
 
+
   const changeTextArea = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(event.target.value);
-  };
-
+  }; 
+  const date = new Date();
   const sendMessage = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     if (value) {
@@ -25,7 +26,7 @@ const ChatInput: FC<ChatInputProps> = ({ userTo, onSend }) => {
         userFrom: localStorage.getItem('userLoggedIn'),
         userTo: userTo,
         text: value,
-        createdAt: Date.now()
+        createdAt: String(date.getHours()) + ':' + String(date.getMinutes())
       }, {
         headers: {
           'Content-Type': 'application/json'

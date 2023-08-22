@@ -45,7 +45,7 @@ export interface IUser {
 export interface IFullChat {
   id: number,
   userFrom: number,
-  userTo?: number,
+  userTo: number,
   text: string,
   createdAt: string,
   senderName: string,

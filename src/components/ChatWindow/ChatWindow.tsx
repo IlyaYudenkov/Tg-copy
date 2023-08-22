@@ -12,7 +12,6 @@ import ChatWindowHeader from '../ChatWindowHeader/ChatWindowHeader';
 import Loader from '../../helpers/UI/Loader';
 
 
-
 const ChatWindow: FC = () => {
 
   const { chosenChatUserFrom: userFrom } = useTypedSelector(state => state.chosenChat);
