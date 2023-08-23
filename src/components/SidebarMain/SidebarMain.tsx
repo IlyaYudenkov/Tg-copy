@@ -40,7 +40,7 @@ const SidebarMain: FC = ({ }) => {
   let finalSortedChats: IChat[] = [];
   const sortedChats: IChat[] = [];
 
-  if (tmpSortedChats.length >= 1) {
+  if (tmpSortedChats.length > 1 && users) {
     tmpSortedChats && tmpSortedChats.forEach(chat => {
       tmpSortedChats && tmpSortedChats.forEach(chat1 => {
         if (chat.userFrom == chat1.userTo && chat.userTo == chat1.userFrom) {
@@ -48,6 +48,7 @@ const SidebarMain: FC = ({ }) => {
         }
         finalSortedChats = [...new Set(sortedChats)];
       });
+     
     });
   }
   else {
@@ -63,6 +64,7 @@ const SidebarMain: FC = ({ }) => {
 
  
   const fullChats = lastMessChats.filter(mess => mess.userFrom == mess.senderId);
+  fullChats && fullChats.sort((chat1:IChat, chat2:IChat) => chat1.id < chat2.id ? 1 : -1);
   
   const filteredChats = fullChats && fullChats.filter(mess => {
     return String(mess.senderId) != userOwner ? mess.senderName.toLowerCase().includes(searchInput.toLowerCase()) : mess.recipient!.toLowerCase().includes(searchInput.toLowerCase());
