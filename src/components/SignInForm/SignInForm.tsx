@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import style from './LogInForm.module.scss';
+import style from './SignInForm.module.scss';
 import {
   Formik,
   Form,
@@ -20,7 +20,7 @@ interface MyFormValues {
 }
 
 
-const LogInForm: FC = () => {
+const SignInForm: FC = () => {
 
   const navigate = useNavigate();
 
@@ -29,7 +29,6 @@ const LogInForm: FC = () => {
   const [correctData, setCorrectData] = useState(false);
 
   const { data: users, error } = useSWR<IUser[]>(urlUsers, fetcher);
-
 
 
   return (
@@ -60,7 +59,7 @@ const LogInForm: FC = () => {
             <FormInput label='Password' id='password' name='password' type='password' placeholder='Password' />
             {!correctData && !isSubmitting ? '' : <div className={style.formAlert}>Enter a correct data</div>}
         
-            {!error ? <Button text='Log in' /> : <div className={style.errorMessage}>{error.message}</div>}
+            {!error ? <Button text='Sign In' /> : <div className={style.errorMessage}>{error.message}</div>}
           </Form>
         )
         }
@@ -70,4 +69,4 @@ const LogInForm: FC = () => {
 };
 
 
-export default LogInForm;
+export default SignInForm;

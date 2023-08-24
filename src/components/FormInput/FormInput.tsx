@@ -3,7 +3,7 @@ import {
   Field,
   useField
 } from 'formik';
-import style from '../LogInForm/LogInForm.module.scss';
+import style from '../SignInForm/SignInForm.module.scss';
 
 interface FormInputProps {
   id: string;

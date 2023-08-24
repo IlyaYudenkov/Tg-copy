@@ -16,7 +16,7 @@
     "editor.minimap.enabled": false,
     "liveServer.settings.mount": [],
     "[scss]": {
-      "editor.defaultFormatter": "stylelint.vscode-stylelint"
+      "editor.defaultFormatter": "vscode.css-language-features"
   },
   "files.autoSaveDelay": 900,
   "stylelint.config": null,
