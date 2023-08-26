@@ -11,7 +11,7 @@ const Telegram: FC = () => {
     <div className={style.telegram}>
       <Sidebar />
       <ChatWindow />
-      <ModalWindow/>
+      <ModalWindow welcome/>
     </div>
   );
 };

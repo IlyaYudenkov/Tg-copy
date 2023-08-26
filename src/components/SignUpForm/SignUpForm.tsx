@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import cls from './SignUpForm.module.scss';
 import { Form, Formik } from 'formik';
 import FormInput from '../FormInput/FormInput';
@@ -6,6 +6,7 @@ import Button from '../../helpers/UI/Button';
 import { urlUsers } from '../../url/url';
 import { SignUpSchema } from '../../schemas/SignUpSchema';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 interface SignUpValues {
@@ -17,7 +18,8 @@ interface SignUpValues {
 
 const SignUpForm: FC = ({ }) => {
   const initialValues: SignUpValues = { name: '', email: '', password: '', confirmPassword: '' };
-  const [correctData, setCorrectData] = useState(false);
+
+  const navigate = useNavigate();
 
   return (
     <div className={cls.SignUpPage}>
@@ -30,23 +32,26 @@ const SignUpForm: FC = ({ }) => {
             name: values.name,
             email: values.email,
             password: values.password
-          }, {
+          },
+           {
             headers: {
               'Content-Type': 'application/json'
             }
-          }).then(() => setCorrectData(true));
+            
+          }).then((response) => {
+            localStorage.setItem('userLoggedIn', String(response.data.id));
+            navigate('/telegram');   
+          });
           actions.resetForm();
         }}>
-        {({ isSubmitting }) => (
+        {({ }) => (
 
           <Form method='post' className={cls.form}>
             <FormInput label='Name' id='name' name='name' type='text' placeholder='Name' />
             <FormInput label='Email' id='email' name='email' type='email' placeholder='Email' />
             <FormInput label='Password' id='password' name='password' type='password' placeholder='Password' />
             <FormInput label='Confirm password' id='Confirm password' name='confirmPassword' type='password' placeholder='Confirm password' />
-
-            {!correctData && !isSubmitting ? '' : <p className={cls.formAlert}>Enter a correct data</p>}
-
+         
             <Button text='Sign Up' navigate='' />
           </Form>
         )

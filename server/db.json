@@ -25,40 +25,16 @@
       "password": "13232357"
     },
     {
-      "name": "ddd",
-      "email": "dd@dd",
-      "password": "dd",
+      "name": "ilyayudenkov",
+      "email": "ilya-yudenkov@mail.ru",
+      "password": "123",
       "id": 5
     },
     {
-      "name": "ddd",
-      "email": "dd@dd",
-      "password": "dd",
+      "name": "ilyayudenkov",
+      "email": "anna716vlasova@gmail.com",
+      "password": "123",
       "id": 6
-    },
-    {
-      "name": "dd",
-      "email": "dd@dd",
-      "password": "123",
-      "id": 7
-    },
-    {
-      "name": "dd",
-      "email": "dd@dd",
-      "password": "123",
-      "id": 8
-    },
-    {
-      "name": "dd",
-      "email": "dd@dd",
-      "password": "123",
-      "id": 9
-    },
-    {
-      "name": "dd",
-      "email": "dd@dd",
-      "password": "123",
-      "id": 10
     }
   ],
   "messages": [
