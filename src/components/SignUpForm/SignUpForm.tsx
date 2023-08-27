@@ -8,7 +8,6 @@ import { SignUpSchema } from '../../schemas/SignUpSchema';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-
 interface SignUpValues {
   name: string,
   email: string
@@ -21,6 +20,7 @@ const SignUpForm: FC = ({ }) => {
 
   const navigate = useNavigate();
 
+
   return (
     <div className={cls.SignUpPage}>
       <h1 className={cls.h1}>Registration</h1>
@@ -28,30 +28,34 @@ const SignUpForm: FC = ({ }) => {
         initialValues={initialValues}
         validationSchema={SignUpSchema}
         onSubmit={(values, actions) => {
-          axios.post(urlUsers, {
-            name: values.name,
-            email: values.email,
-            password: values.password
-          },
-           {
-            headers: {
-              'Content-Type': 'application/json'
-            }
+     
+            axios.post(urlUsers, {
+              name: values.name,
+              email: values.email,
+              password: values.password
+            },
             
-          }).then((response) => {
-            localStorage.setItem('userLoggedIn', String(response.data.id));
-            navigate('/telegram');   
-          });
+             {
+              headers: {
+                'Content-Type': 'application/json'
+              }
+              
+            })
+            .then((res) => {
+                localStorage.setItem('userLoggedIn', String(res.data.id));
+                navigate('/telegram');
+            }); 
+          
           actions.resetForm();
         }}>
-        {({ }) => (
+        {({ errors, touched  }) => (
 
           <Form method='post' className={cls.form}>
             <FormInput label='Name' id='name' name='name' type='text' placeholder='Name' />
             <FormInput label='Email' id='email' name='email' type='email' placeholder='Email' />
             <FormInput label='Password' id='password' name='password' type='password' placeholder='Password' />
             <FormInput label='Confirm password' id='Confirm password' name='confirmPassword' type='password' placeholder='Confirm password' />
-         
+            {errors.name && touched.name || errors.email && touched.email || errors.password && touched.password || errors.confirmPassword && touched.confirmPassword ? <p className={cls.formAlert}>Enter the correct required data</p> : null}
             <Button text='Sign Up' navigate='' />
           </Form>
         )

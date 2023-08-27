@@ -1,7 +1,7 @@
 import React, { FC  } from 'react';
 import cls from './Helpers.module.scss';
 import { useDispatch } from 'react-redux';
-import { modalErrorState } from '../../store/reducers/modalErrorReducer';
+import { modalWindowState } from '../../store/reducers/modalWindowReducer';
 import { useNavigate } from 'react-router-dom';
 
 interface ButtonProps {
@@ -17,8 +17,8 @@ const Button: FC<ButtonProps> = ({ text, isModal, navigate }) => {
 
     const nav = useNavigate();
 
-    const closeModalError = () => {
-        dispatch(modalErrorState(false));
+    const closeModalWindow = () => {
+        dispatch(modalWindowState(false));
     };
 
     const navigateTo = () => {
@@ -27,7 +27,7 @@ const Button: FC<ButtonProps> = ({ text, isModal, navigate }) => {
 
 
     return (
-      <button type="submit" className={cls.Button} onClick={isModal ? closeModalError : navigate ? navigateTo : undefined}>{text}</button>
+      <button type="submit" className={cls.Button} onClick={isModal ? closeModalWindow : navigate ? navigateTo : undefined}>{text}</button>
     );
 };
 export default Button;

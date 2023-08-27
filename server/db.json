@@ -29,12 +29,6 @@
       "email": "ilya-yudenkov@mail.ru",
       "password": "123",
       "id": 5
-    },
-    {
-      "name": "ilyayudenkov",
-      "email": "anna716vlasova@gmail.com",
-      "password": "123",
-      "id": 6
     }
   ],
   "messages": [
@@ -86,6 +80,20 @@
       "text": "hi",
       "createdAt": "19:49",
       "id": 7
+    },
+    {
+      "userFrom": "1",
+      "userTo": 3,
+      "text": "d",
+      "createdAt": "18:45",
+      "id": 8
+    },
+    {
+      "userFrom": "1",
+      "userTo": 2,
+      "text": "d1",
+      "createdAt": "18:45",
+      "id": 9
     }
   ]
 }

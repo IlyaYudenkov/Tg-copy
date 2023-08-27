@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { urlChats } from '../../url/url';
-import { modalErrorState, modalErrorText } from '../../store/reducers/modalErrorReducer';
+import { modalWindowState, modalWindowText } from '../../store/reducers/modalWindowReducer';
 import { userOwner } from '../userOwner';
 
 
@@ -22,14 +22,14 @@ const ContextMenu: FC<ContextMenuProps> = ({ setOpenContextMenu, clientX, client
   
   const dispatch = useDispatch();
 
-  const openModalErrorNoMessage = () => {
-    dispatch(modalErrorState(true));
-    dispatch(modalErrorText('Choose a message to delete'));
+  const openModalWindowNoMessage = () => {
+    dispatch(modalWindowState(true));
+    dispatch(modalWindowText('Choose a message to delete'));
   };
 
-  const openModalErrorNotYourMessage = () => {
-    dispatch(modalErrorState(true));
-    dispatch(modalErrorText('Choose your message to delete'));
+  const openModalWindowNotYourMessage = () => {
+    dispatch(modalWindowState(true));
+    dispatch(modalWindowText('Choose your message to delete'));
   };
 
   const { chosenMessageId: id } = useTypedSelector(state => state.chosenMessage);
@@ -42,12 +42,12 @@ const ContextMenu: FC<ContextMenuProps> = ({ setOpenContextMenu, clientX, client
       event.stopPropagation();
       axios.delete(`${urlChats}/${id}`).then(() => {
         onRemove();
-      }).catch(openModalErrorNoMessage);
+      }).catch(openModalWindowNoMessage);
     }
     else {
       setOpenContextMenu(false);
       event.stopPropagation();
-      openModalErrorNotYourMessage();
+      openModalWindowNotYourMessage();
     }
     setUserFromState(0);
 

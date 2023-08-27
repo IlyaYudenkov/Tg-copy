@@ -3,7 +3,7 @@ import chatsReducer from './reducers/chatsReducer';
 import chosenChatReducer from './reducers/chosenChatReducer';
 import searchChatsReducer from './reducers/searchChatsReducer';
 import chosenMessageReducer from './reducers/chosenMessageReducer';
-import modalErrorReducer from './reducers/modalErrorReducer';
+import modalWindowReducer from './reducers/modalWindowReducer';
 
 
 export const store = configureStore({
@@ -12,7 +12,7 @@ export const store = configureStore({
       searchChats: searchChatsReducer,
       chosenChat: chosenChatReducer,
       chosenMessage: chosenMessageReducer,
-      modalError: modalErrorReducer
+      modalWindow: modalWindowReducer
    }
 });
 

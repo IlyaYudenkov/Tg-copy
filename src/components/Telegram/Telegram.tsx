@@ -1,17 +1,41 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import ChatWindow from '../ChatWindow/ChatWindow';
 import Sidebar from '../Sidebar/Sidebar';
 import style from './Telegram.module.scss';
 import ModalWindow from '../ModalWindow/ModalWindow';
+import { userOwner } from '../../helpers/userOwner';
+import { useDispatch } from 'react-redux';
+import { modalWindowState, modalWindowText } from '../../store/reducers/modalWindowReducer';
+import { urlUsers } from '../../url/url';
+import { fetcher } from '../../helpers/fetcher';
+import useSWR from 'swr';
+import { IUser } from '../../types/types';
 
 const Telegram: FC = () => {
 
+
+
+  const {data: users} = useSWR<IUser[]>(urlUsers, fetcher);
+
+const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    if(users){
+      dispatch(modalWindowState(true));
+      dispatch(modalWindowText(`Welcome, ${users[Number(userOwner)-1].name}`));
+      setInterval(() => {
+        dispatch(modalWindowState(false));
+      }, 800);
+    }
+    
+  },[]);
 
   return (
     <div className={style.telegram}>
       <Sidebar />
       <ChatWindow />
-      <ModalWindow welcome/>
+      <ModalWindow welcome />
     </div>
   );
 };
