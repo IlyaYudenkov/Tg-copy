@@ -40,14 +40,15 @@ const SignInForm: FC = () => {
         onSubmit={(values, actions) => {
           users && users.map(user => {
             if (user.email === values.email && user.password === values.password) {
-              setCorrectData(true);
               localStorage.setItem('userLoggedIn', String(user.id));
-              navigate('/telegram');
+              setCorrectData(true);
               actions.resetForm();
+              navigate('/telegram');
             }
             else {
               setCorrectData(false);
             }
+            
           });
         }}>
         {({ isSubmitting }) => (

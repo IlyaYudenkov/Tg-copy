@@ -6,6 +6,7 @@ import { ProtectedRoute } from './helpers/ProtectedRoute';
 import MainPage from './components/MainPage/MainPage';
 import SignUpPage from './components/SignUpForm/SignUpForm';
 import SignInForm from './components/SignInForm/SignInForm';
+import { userOwner } from './helpers/userOwner';
 
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
       <div className='App'>
         <Routes>
           <Route path='/telegram' element={
-            <ProtectedRoute condition={localStorage.getItem('userLoggedIn') ? true : false}>
+            <ProtectedRoute condition={!!userOwner}>
               <Telegram/>
             </ProtectedRoute>} />
           <Route path='/' element={<MainPage />} />

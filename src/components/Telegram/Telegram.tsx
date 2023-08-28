@@ -13,23 +13,22 @@ import { IUser } from '../../types/types';
 
 const Telegram: FC = () => {
 
+  const { data: users } = useSWR<IUser[]>(urlUsers, fetcher);
 
-
-  const {data: users} = useSWR<IUser[]>(urlUsers, fetcher);
-
-const dispatch = useDispatch();
-
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if(users){
+      const userOwnerName = users && users.find(user => {
+        if (String(user.id) == userOwner) {
+          return user;
+        }
+      });
       dispatch(modalWindowState(true));
-      dispatch(modalWindowText(`Welcome, ${users[Number(userOwner)-1].name}`));
+      dispatch(modalWindowText(`Welcome, ${userOwnerName && userOwnerName.name}`));
       setInterval(() => {
         dispatch(modalWindowState(false));
       }, 800);
-    }
-    
-  },[]);
+  }, [users]);
 
   return (
     <div className={style.telegram}>
