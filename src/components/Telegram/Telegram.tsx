@@ -18,16 +18,15 @@ const Telegram: FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-      const userOwnerName = users && users.find(user => {
-        if (String(user.id) == userOwner) {
-          return user;
-        }
-      });
+    if(users){
+      const userOwnerName = users && users.find(user => String(user.id) === userOwner);
       dispatch(modalWindowState(true));
       dispatch(modalWindowText(`Welcome, ${userOwnerName && userOwnerName.name}`));
       setInterval(() => {
         dispatch(modalWindowState(false));
       }, 800);
+    }
+      
   }, [users]);
 
   return (
