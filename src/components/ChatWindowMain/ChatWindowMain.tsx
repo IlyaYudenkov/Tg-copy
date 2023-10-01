@@ -1,4 +1,4 @@
-import React, { useState, FC, useMemo } from 'react';
+import React, { useState, FC } from 'react';
 import style from '../ChatWindow/ChatWindow.module.scss';
 import ChatInput from '../ChatInput/ChatInput';
 import Message from '../Message/Message';
@@ -16,9 +16,8 @@ interface ChatWindowMainProps {
 
 }
 
-const ChatWindowMain: FC<ChatWindowMainProps> = ({ userTo, user, sortedChat, mutateChatTo, mutateChatFrom }) => {
+const ChatWindowMain: FC<ChatWindowMainProps> = ({ userTo, user, sortedChat, mutateChatFrom }) => {
 
-  useMemo(() => { mutateChatTo(); }, [sortedChat]);
 
   const [openContextMenu, setOpenContextMenu] = useState(false);
 

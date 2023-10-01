@@ -26,14 +26,13 @@ const Telegram: FC = () => {
         dispatch(modalWindowState(false));
       }, 800);
     }
-      
   }, [users]);
 
   return (
     <div className={style.telegram}>
       <Sidebar />
       <ChatWindow />
-      <ModalWindow welcome />
+      <ModalWindow/>
     </div>
   );
 };
