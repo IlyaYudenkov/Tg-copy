@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './styles/App.css';
+import './styles/App.module.scss';
 import Telegram from './components/Telegram/Telegram';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { ProtectedRoute } from './helpers/ProtectedRoute';
@@ -12,7 +12,6 @@ import { useTypedSelector } from './hooks/useTypedSelector';
 function App() {
 
   const {authId} = useTypedSelector(state => state.auth);
-  console.log(authId);
   
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [textModal, setTextModal] = useState<string>('');

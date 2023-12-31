@@ -4,9 +4,9 @@ import style from './Helpers.module.scss';
 const Error = ({ }) => {
 
   return (
-    <div className={style.helpers}>
+    <p className={style.helpers}>
       An error has occured
-    </div>
+    </p>
   );
 };
 export default Error;

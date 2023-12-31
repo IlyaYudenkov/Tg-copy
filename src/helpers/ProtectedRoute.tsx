@@ -6,7 +6,6 @@ const ProtectedRoute: FC<{condition: boolean, children: React.ReactElement}> = (
   
   const userOwner = useUserOwner();
 
-  console.log(userOwner);
     if (!condition || !userOwner) {
       return <Navigate to="/" replace />;
     }

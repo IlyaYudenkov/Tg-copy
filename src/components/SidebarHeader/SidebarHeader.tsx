@@ -1,12 +1,15 @@
 import React from 'react';
 import HeaderSearch from '../HeaderSearch/HeaderSearch';
-import style from '../Sidebar/Sidebar.module.scss';
+import cls from '../Sidebar/Sidebar.module.scss';
+import BurgerMenuIcon from './burger-menu.svg';
 
 const SidebarHeader = () => {
 
  return (
-   <div className={style.sidebar__header}>
-     <div className={style.header__searchIcon}></div>
+   <div className={cls.sidebar__header}>
+     <div className={cls.header__searchIcon}>
+       <img src={BurgerMenuIcon} alt="Burger Menu Icon" />
+     </div>
      <HeaderSearch />
    </div>
  );

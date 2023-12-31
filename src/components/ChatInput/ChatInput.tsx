@@ -1,6 +1,5 @@
 import React, { useState, FC } from 'react';
-import style from './ChatInput.module.scss';
-import styles from '../ChatWindow/ChatWindow.module.scss';
+import cls from './ChatInput.module.scss';
 import axios from 'axios';
 import { urlChats } from '../../url/url';
 
@@ -17,12 +16,12 @@ const ChatInput: FC<ChatInputProps> = ({ userTo, onSend }) => {
 
   const changeTextArea = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(event.target.value);
-  }; 
-  
+  };
+
   const date = new Date();
 
   const zeroOrNull = () => {
-   return date.getMinutes() < 10 ? '0' : '';
+    return date.getMinutes() < 10 ? '0' : '';
   };
 
   const sendMessage = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -46,10 +45,12 @@ const ChatInput: FC<ChatInputProps> = ({ userTo, onSend }) => {
 
   return (
     <form action='submit'>
-      <div className={styles.main__chatInput}>
-        <div className={style.chatInput__input}>
+      <div className={cls.main__chatInput}>
+        <div className={cls.chatInput__input}>
           <textarea placeholder='Write a message...' value={value} onChange={changeTextArea} />
-          <button onClick={sendMessage}>Send message</button>
+          <button onClick={sendMessage}>
+            Send message
+          </button>
         </div>
       </div>
     </form>

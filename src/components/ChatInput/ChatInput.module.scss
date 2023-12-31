@@ -1,3 +1,16 @@
+.main {
+    &__chatInput {
+        display: grid;
+        grid-area: input;
+        grid-template-areas: 'input';
+        grid-template-columns: 1fr;
+        /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
+        grid-template-rows: minmax(40px, 70px);
+        background-color: #fff;
+    }
+}
+
+
 .chatInput {
     &__input {
         display: grid;
@@ -20,16 +33,6 @@
                 background-color: rgb(109 109 109);
                 transition-duration: 0.3s;
             }
-        }
-    }
-
-    &__file {
-        display: grid;
-        grid-area: file;
-        padding: 5px;
-
-        & input {
-            cursor: pointer;
         }
     }
 }

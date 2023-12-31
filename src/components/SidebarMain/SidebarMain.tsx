@@ -16,9 +16,10 @@ const SidebarMain: FC = ({ }) => {
   //HOOKS
   const { searchInput } = useTypedSelector(state => state.searchChats);
   const userOwner = useUserOwner();
+  
 
   //API
-  const { data: chatsFrom, isLoading, error } = useSWR<IChat[]>(urlChats + `?userFrom=${userOwner}`, fetcher);
+  const { data: chatsFrom, isLoading, error } = useSWR<IChat[]>(urlChats + `?userFrom=${userOwner}`, fetcher, {refreshInterval: 5000});
   const { data: chatsTo } = useSWR<IChat[]>(urlChats + `?userTo=${userOwner}`, fetcher);
   const { data: users } = useSWR<IUser[]>(chatsFrom ? urlUsers : null, fetcher);
 

@@ -1,19 +1,19 @@
-.chat{
-    &__messageUserFrom{
+.chat {
+    &__messageUserFrom {
         display: flex;
         justify-content: flex-end;
     }
 
-    &__messageUserTo{
+    &__messageUserTo {
         display: flex;
         justify-content: flex-start;
     }
 }
 
 
-.message{
-   &__info{
-         display: inline-flex;
+.message {
+    &__info {
+        display: inline-flex;
         align-items: flex-end;
         justify-content: space-between;
         justify-self: flex-start;
@@ -21,17 +21,17 @@
         border-radius: 7px;
         padding: 10px;
         background: white;
-   }
+    }
 }
 
-.info{
-    &__text{
+.info {
+    &__text {
         overflow-wrap: break-word;
         font-size: 1.15rem;
         line-height: 1.3em;
     }
 
-    &__time{
+    &__time {
         display: flex;
         justify-items: flex-end;
         margin-left: 10px;

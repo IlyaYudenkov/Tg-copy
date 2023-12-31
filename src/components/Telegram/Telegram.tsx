@@ -28,7 +28,11 @@ const Telegram: FC<ITelegram> = ({ isOpenModal, setIsOpenModal, textModal, setTe
     if (users) {
       const userOwner = users && users.find(user => String(user.id) === userOwnerId);
       setIsOpenModal(true);
+      const timeoutId = setTimeout(() => {
+        setIsOpenModal(false);
+      }, 800);
       setTextModal(`Welcome, ${userOwner && userOwner.name}`);
+      return () => clearTimeout(timeoutId);
     }
   }, [userOwnerId, users]);
 
@@ -36,7 +40,7 @@ const Telegram: FC<ITelegram> = ({ isOpenModal, setIsOpenModal, textModal, setTe
     <div className={cls.telegram}>
       <Sidebar />
       <ChatWindow isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} setTextModal={setTextModal} />
-      <ModalWindow isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} textModal={textModal} />
+      <ModalWindow isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} textModal={textModal}/>
     </div>
   );
 };

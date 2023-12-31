@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import style from './Message.module.scss';
+import cls from './Message.module.scss';
 import { useDispatch } from 'react-redux';
 import { messageChooseId, messageChooseUserFrom } from '../../store/reducers/chosenMessageReducer';
 
-interface MessageProps {
+interface IMessageProps {
   id: number,
   userTo: number,
   userFrom: number,
@@ -11,7 +11,7 @@ interface MessageProps {
   date: string,
 }
 
-const Message: FC<MessageProps> = ({ text, date, userFrom, id }) => {
+const Message: FC<IMessageProps> = ({ text, date, userFrom, id }) => {
 
   const dispatch = useDispatch();
 
@@ -21,12 +21,12 @@ const Message: FC<MessageProps> = ({ text, date, userFrom, id }) => {
   };
 
   return (
-    <div className={String(userFrom) !== localStorage.getItem('userLoggedIn') ? style.chat__messageUserTo : style.chat__messageUserFrom} onContextMenu={selectMessage}>
-      <div className={style.message__info}>
-        <p className={style.info__text}>
+    <div className={String(userFrom) !== localStorage.getItem('userLoggedIn') ? cls.chat__messageUserTo : cls.chat__messageUserFrom} onContextMenu={selectMessage}>
+      <div className={cls.message__info}>
+        <p className={cls.info__text}>
           {text}
         </p>
-        <p className={style.info__time}>
+        <p className={cls.info__time}>
           {date}
         </p>
       </div>

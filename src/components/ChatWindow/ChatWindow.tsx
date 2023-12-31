@@ -37,7 +37,6 @@ const ChatWindow: FC<IChatWindow> = ({isOpenModal, setIsOpenModal, setTextModal}
 
   const sortedChat = genChat && genChat.sort((chat1: IChat, chat2: IChat) => chat1.id > chat2.id ? 1 : -1);
 
-
   if (isLoading) return (
     <div className={styles.helpersChatWindow}>
       <Loader />

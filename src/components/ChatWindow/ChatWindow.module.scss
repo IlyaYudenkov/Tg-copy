@@ -82,16 +82,6 @@
         overflow-x: hidden;
         overflow-y: auto;
         height: 100%;
-        
-    }
-
-    &__chatInput{
-        display: grid;
-        grid-area: input;
-        grid-template-areas: 'input';
-        grid-template-columns: 1fr;
-        grid-template-rows:  minmax(50px, 70px);
-        background-color: #fff;
     }
 }
 

@@ -5,9 +5,9 @@ import style from './Helpers.module.scss';
 const ChatsNotFound = () => {
 
  return (
-   <div className={style.helpers}>
+   <p className={style.helpers}>
      Chats not found
-   </div>
+   </p>
  );
 };
 export default ChatsNotFound;

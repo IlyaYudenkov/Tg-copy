@@ -6,17 +6,22 @@ import { urlChats } from '../../url/url';
 import { useUserOwner } from '../userOwner';
 
 
-interface ContextMenuProps {
+interface IContextMenu {
   clientX: number,
   clientY: number,
   setOpenContextMenu: (openContextMenu: boolean) => void,
   onRemove: () => void;
   isOpenModal: boolean,
-  setIsOpenModal: (isOpenModal:boolean) => void,
+  setIsOpenModal: (isOpenModal: boolean) => void,
   setTextModal: (textModal: string) => void
 }
 
-const ContextMenu: FC<ContextMenuProps> = ({ setOpenContextMenu, clientX, clientY, onRemove, setIsOpenModal, setTextModal }) => {
+const ContextMenu: FC<IContextMenu> = ({ setOpenContextMenu,
+  clientX,
+  clientY,
+  onRemove,
+  setIsOpenModal,
+  setTextModal }) => {
 
   //HOOKS
   const userOwner = useUserOwner();
@@ -37,10 +42,9 @@ const ContextMenu: FC<ContextMenuProps> = ({ setOpenContextMenu, clientX, client
     setIsOpenModal(true);
   };
 
-
   const removeMessage = (event: React.MouseEvent<HTMLButtonElement>) => {
     setUserFromState(userFrom);
-    if (userFrom == userOwner || userFrom == null && id) {
+    if (userFrom === userOwner || userFrom === null && id) {
       setOpenContextMenu(false);
       event.stopPropagation();
       axios.delete(`${urlChats}/${id}`).then(() => {
@@ -54,8 +58,6 @@ const ContextMenu: FC<ContextMenuProps> = ({ setOpenContextMenu, clientX, client
     }
     setUserFromState(0);
   };
-
-
 
   return (
     <button className={style.contextMenu} style={{ top: `${clientY}px`, left: `${clientX}px` }} onClick={removeMessage} >
