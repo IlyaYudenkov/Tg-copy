@@ -1,12 +1,9 @@
 import React, { FC, useState } from 'react';
 import style from './Helpers.module.scss';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { urlChats } from '../../url/url';
-import { modalWindowState, modalWindowText } from '../../store/reducers/modalWindowReducer';
-import { userOwner } from '../userOwner';
-
+import { useUserOwner } from '../userOwner';
 
 
 interface ContextMenuProps {
@@ -14,28 +11,34 @@ interface ContextMenuProps {
   clientY: number,
   setOpenContextMenu: (openContextMenu: boolean) => void,
   onRemove: () => void;
+  isOpenModal: boolean,
+  setIsOpenModal: (isOpenModal:boolean) => void,
+  setTextModal: (textModal: string) => void
 }
 
-const ContextMenu: FC<ContextMenuProps> = ({ setOpenContextMenu, clientX, clientY, onRemove }) => {
+const ContextMenu: FC<ContextMenuProps> = ({ setOpenContextMenu, clientX, clientY, onRemove, setIsOpenModal, setTextModal }) => {
 
+  //HOOKS
+  const userOwner = useUserOwner();
+  const { chosenMessageId: id } = useTypedSelector(state => state.chosenMessage);
+  const { chosenMessageUserFrom: userFrom } = useTypedSelector(state => state.chosenMessage);
 
-  
-  const dispatch = useDispatch();
+  //STATE
+  const [userFromState, setUserFromState] = useState(userFrom);
 
+  //FUNCTIONS
   const openModalWindowNoMessage = () => {
-    dispatch(modalWindowState(true));
-    dispatch(modalWindowText('Choose a message to delete'));
+    setTextModal('Choose a message to delete');
+    setIsOpenModal(true);
   };
 
   const openModalWindowNotYourMessage = () => {
-    dispatch(modalWindowState(true));
-    dispatch(modalWindowText('Choose your message to delete'));
+    setTextModal('Choose your message to delete');
+    setIsOpenModal(true);
   };
 
-  const { chosenMessageId: id } = useTypedSelector(state => state.chosenMessage);
-  const { chosenMessageUserFrom: userFrom } = useTypedSelector(state => state.chosenMessage);
-  const [userFromState, setUserFromState] = useState(userFrom);
-  const removeMessage = (event: React.MouseEvent<HTMLDivElement>) => {
+
+  const removeMessage = (event: React.MouseEvent<HTMLButtonElement>) => {
     setUserFromState(userFrom);
     if (userFrom == userOwner || userFrom == null && id) {
       setOpenContextMenu(false);
@@ -50,15 +53,14 @@ const ContextMenu: FC<ContextMenuProps> = ({ setOpenContextMenu, clientX, client
       openModalWindowNotYourMessage();
     }
     setUserFromState(0);
-
   };
 
 
 
   return (
-    <div className={style.contextMenu} style={{ top: `${clientY}px`, left: `${clientX}px` }} onClick={removeMessage} >
+    <button className={style.contextMenu} style={{ top: `${clientY}px`, left: `${clientX}px` }} onClick={removeMessage} >
       Remove message
-    </div>
+    </button>
   );
 };
 export default ContextMenu;

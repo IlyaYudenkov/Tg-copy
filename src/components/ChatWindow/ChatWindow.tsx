@@ -12,7 +12,13 @@ import ChatWindowHeader from '../ChatWindowHeader/ChatWindowHeader';
 import Loader from '../../helpers/UI/Loader';
 
 
-const ChatWindow: FC = () => {
+interface IChatWindow{
+  isOpenModal: boolean,
+  setIsOpenModal: (openModal:boolean) => void,
+  setTextModal: (textModal: string) => void
+}
+
+const ChatWindow: FC<IChatWindow> = ({isOpenModal, setIsOpenModal, setTextModal}) => {
 
   const { chosenChatUserFrom: userFrom } = useTypedSelector(state => state.chosenChat);
   const { chosenChatUserTo: userTo } = useTypedSelector(state => state.chosenChat);
@@ -43,7 +49,7 @@ const ChatWindow: FC = () => {
     <div className={userFrom ? style.chatWindowActive : style.chatWindow} >
       <ChatWindowHeader user={user && user} />
       <ChatWindowChooseChat userTo={userTo && userTo} />
-      <ChatWindowMain userTo={userTo && userTo} sortedChat={sortedChat} mutateChatTo={() => mutateChatTo()} mutateChatFrom={() => mutateChatFrom()} user={user && user} />
+      <ChatWindowMain userTo={userTo && userTo} sortedChat={sortedChat} mutateChatTo={() => mutateChatTo()} mutateChatFrom={() => mutateChatFrom()} user={user && user} isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} setTextModal={setTextModal}/>
     </div>
   );
 };

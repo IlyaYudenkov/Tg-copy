@@ -16,14 +16,16 @@ interface SignUpValues {
 }
 
 const SignUpForm: FC = ({ }) => {
+
   const initialValues: SignUpValues = { name: '', email: '', password: '', confirmPassword: '' };
 
   const navigate = useNavigate();
 
-
   return (
     <div className={cls.SignUpPage}>
-      <h1 className={cls.h1}>Registration</h1>
+      <h1 className={cls.h1}>
+        Registration
+      </h1>
       <Formik
         initialValues={initialValues}
         validationSchema={SignUpSchema}

@@ -1,3 +1,12 @@
+export interface IAuthorization{
+  authId: number
+}
+
+export interface MyFormValues {
+  email: string;
+  password: string;
+}
+
 export interface IChat {
   id: number,
   userFrom: number,
@@ -52,4 +61,6 @@ export interface IFullChat {
   senderId: number,
   recipient?: string | undefined
 }
+
+
 

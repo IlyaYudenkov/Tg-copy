@@ -1,38 +1,42 @@
 import React, { FC, useEffect } from 'react';
 import ChatWindow from '../ChatWindow/ChatWindow';
 import Sidebar from '../Sidebar/Sidebar';
-import style from './Telegram.module.scss';
+import cls from './Telegram.module.scss';
 import ModalWindow from '../ModalWindow/ModalWindow';
-import { userOwner } from '../../helpers/userOwner';
-import { useDispatch } from 'react-redux';
-import { modalWindowState, modalWindowText } from '../../store/reducers/modalWindowReducer';
+import { useUserOwner } from '../../helpers/userOwner';
 import { urlUsers } from '../../url/url';
 import { fetcher } from '../../helpers/fetcher';
 import useSWR from 'swr';
 import { IUser } from '../../types/types';
 
-const Telegram: FC = () => {
+interface ITelegram {
+  isOpenModal: boolean,
+  setIsOpenModal: (isOpenModal: boolean) => void,
+  textModal: string,
+  setTextModal: (textModal: string) => void
+}
 
+
+const Telegram: FC<ITelegram> = ({ isOpenModal, setIsOpenModal, textModal, setTextModal }) => {
+
+  //API
   const { data: users } = useSWR<IUser[]>(urlUsers, fetcher);
 
-  const dispatch = useDispatch();
+  const userOwnerId = useUserOwner();
 
   useEffect(() => {
-    if(users){
-      const userOwnerName = users && users.find(user => String(user.id) === userOwner);
-      dispatch(modalWindowState(true));
-      dispatch(modalWindowText(`Welcome, ${userOwnerName && userOwnerName.name}`));
-      setInterval(() => {
-        dispatch(modalWindowState(false));
-      }, 800);
+    if (users) {
+      const userOwner = users && users.find(user => String(user.id) === userOwnerId);
+      setIsOpenModal(true);
+      setTextModal(`Welcome, ${userOwner && userOwner.name}`);
     }
-  }, [users]);
+  }, [userOwnerId, users]);
 
   return (
-    <div className={style.telegram}>
+    <div className={cls.telegram}>
       <Sidebar />
-      <ChatWindow />
-      <ModalWindow/>
+      <ChatWindow isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} setTextModal={setTextModal} />
+      <ModalWindow isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} textModal={textModal} />
     </div>
   );
 };

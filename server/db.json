@@ -98,13 +98,6 @@
     {
       "userFrom": "1",
       "userTo": 2,
-      "text": "dsdsd",
-      "createdAt": "19:54",
-      "id": 10
-    },
-    {
-      "userFrom": "1",
-      "userTo": 2,
       "text": "ddd",
       "createdAt": "19:54",
       "id": 11
@@ -114,14 +107,14 @@
       "userTo": 1,
       "text": "dd222",
       "createdAt": "19:54",
-      "id": 12  
+      "id": 12
     },
     {
       "userFrom": "2",
       "userTo": 1,
       "text": "3",
       "createdAt": "19:55",
-      "id": 13  
+      "id": 13
     }
   ]
 }
