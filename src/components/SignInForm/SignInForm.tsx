@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import style from './SignInForm.module.scss';
+import cls from './SignInForm.module.scss';
 import {
   Formik,
   Form,
@@ -17,7 +17,7 @@ import { useDispatch } from 'react-redux';
 import { setAuthId } from '../../store/reducers/authReducer';
 
 
-interface ISingInForm{
+interface ISingInForm {
   isOpenModal: boolean,
   setIsOpenModal: (isOpenModal: boolean) => void
 }
@@ -55,7 +55,7 @@ const SignInForm: FC<ISingInForm> = ({ setIsOpenModal }) => {
 
   return (
     <div>
-      <h1 className={style.h1}>
+      <h1 className={cls.title}>
         Autorization
       </h1>
       <Formik
@@ -64,15 +64,17 @@ const SignInForm: FC<ISingInForm> = ({ setIsOpenModal }) => {
         onSubmit={(values, actions) => handleLogIn(values, actions)}>
         {({ isSubmitting }) => (
 
-          <Form method='post' className={style.form}>
+          <Form method='post' className={cls.form}>
 
             <FormInput label='Email' id='email' name='email' type='email' placeholder='Email' />
 
             <FormInput label='Password' id='password' name='password' type='password' placeholder='Password' />
 
-            {!correctData && !isSubmitting ? '' : <p className={style.formAlert}>Enter a correct data</p>}
+            {!correctData && !isSubmitting ? '' : <p className={cls.formAlert}>Enter a correct data</p>}
+            <div className={cls.button}>
+              {!error ? <Button text='Sign In' onClick={() => navigate('/signIn')}/> : <p className={cls.errorMessage}>{error.message}</p>}
+            </div>
 
-            {!error ? <Button text='Sign In' /> : <p className={style.errorMessage}>{error.message}</p>}
           </Form>
         )}
       </Formik>

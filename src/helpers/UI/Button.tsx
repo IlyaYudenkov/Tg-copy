@@ -1,35 +1,18 @@
 import React, { FC } from 'react';
 import cls from './Helpers.module.scss';
-import { useNavigate } from 'react-router-dom';
 
-interface ButtonProps {
+interface IButton {
     text: string,
-    isModal?: boolean,
-    setIsOpenModal?: (isOpenModal: boolean) => void,
-    navigate?: string
+    onClick?: () => void
 }
 
 
-const Button: FC<ButtonProps> = ({ text, isModal, setIsOpenModal, navigate }) => {
-
-    const nav = useNavigate();
-
-    const navigateTo = (path: string) => {
-        nav(`${path}`);
-    };
-
-    const buttonFunction = () => {
-        if (isModal && setIsOpenModal) {
-            return setIsOpenModal(false);
-        }
-        navigate && navigateTo(navigate);
-    };
-
+const Button: FC<IButton> = ({ text, onClick }) => {
 
     return (
       <button type="submit"
             className={cls.Button}
-            onClick={buttonFunction}>
+            onClick={onClick}>
         {text}
       </button>
     );

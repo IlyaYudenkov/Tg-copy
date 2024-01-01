@@ -7,6 +7,13 @@ export interface MyFormValues {
   password: string;
 }
 
+export interface SignUpValues {
+  name: string,
+  email: string
+  password: string,
+  confirmPassword: string
+}
+
 export interface IChat {
   id: number,
   userFrom: number,

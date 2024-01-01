@@ -19,7 +19,7 @@ const ModalWindow: FC <IModalWindow>= ({isOpenModal, setIsOpenModal, textModal, 
           <h2>
             {textModal}
           </h2>
-          {<Button text='Got it' isModal setIsOpenModal={setIsOpenModal} />}
+          {<Button text='Got it' onClick={() => setIsOpenModal(false)}/>}
         </div>
       </div>
     </div>

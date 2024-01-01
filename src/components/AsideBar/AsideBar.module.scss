@@ -1,0 +1,57 @@
+.asideBarBackground{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100vw;
+    height: 100%;
+    background: rgb(0 0 0 / 50%) center ;
+    opacity: 0;
+    transition-duration: 0.3s;
+}
+
+.active{
+    z-index: 10;
+    opacity: 1;
+    transition-duration: 0.3s;
+}
+
+.asideBar{
+    position: fixed;
+    left: -200px;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #fff;
+    transition-duration: 0.4s;
+}
+
+.asideBarActive{
+    left: 0;
+    transition-duration: 0.4s;
+}
+
+.asideBarContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.info{
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+
+    & p{
+        line-height: 1.2em;
+        text-align: center;
+    }
+}
+
+.userOwnerName{
+    font-weight: 700;
+}

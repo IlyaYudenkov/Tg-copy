@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import ChatWindow from '../ChatWindow/ChatWindow';
 import Sidebar from '../Sidebar/Sidebar';
 import cls from './Telegram.module.scss';
@@ -8,6 +8,7 @@ import { urlUsers } from '../../url/url';
 import { fetcher } from '../../helpers/fetcher';
 import useSWR from 'swr';
 import { IUser } from '../../types/types';
+import AsideBar from '../AsideBar/AsideBar';
 
 interface ITelegram {
   isOpenModal: boolean,
@@ -19,6 +20,10 @@ interface ITelegram {
 
 const Telegram: FC<ITelegram> = ({ isOpenModal, setIsOpenModal, textModal, setTextModal }) => {
 
+  //STATE
+  const [isOpenAsideBar, setIsOpenAsideBar] = useState<boolean>(false);
+  const [userOwnerName, setUserOwnerName] = useState<string>('');
+
   //API
   const { data: users } = useSWR<IUser[]>(urlUsers, fetcher);
 
@@ -27,6 +32,7 @@ const Telegram: FC<ITelegram> = ({ isOpenModal, setIsOpenModal, textModal, setTe
   useEffect(() => {
     if (users) {
       const userOwner = users && users.find(user => String(user.id) === userOwnerId);
+      setUserOwnerName(userOwner ? userOwner.name : '');
       setIsOpenModal(true);
       const timeoutId = setTimeout(() => {
         setIsOpenModal(false);
@@ -38,9 +44,10 @@ const Telegram: FC<ITelegram> = ({ isOpenModal, setIsOpenModal, textModal, setTe
 
   return (
     <div className={cls.telegram}>
-      <Sidebar />
+      <Sidebar isOpenAsideBar={isOpenAsideBar} setIsOpenAsideBar={setIsOpenAsideBar}/>
       <ChatWindow isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} setTextModal={setTextModal} />
       <ModalWindow isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} textModal={textModal}/>
+      <AsideBar isOpenAsideBar={isOpenAsideBar} setIsOpenAsideBar={setIsOpenAsideBar} userOwnerName={userOwnerName}/>
     </div>
   );
 };
