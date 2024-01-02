@@ -25,12 +25,12 @@ const AsideBar: FC<IAsideBar> = ({ isOpenAsideBar, setIsOpenAsideBar, userOwnerN
         <div className={`${cls.asideBar} ${isOpenAsideBar ? `${cls.asideBarActive}` : ''}`} onClick={(e) => e.stopPropagation()}>
           <div className={cls.asideBarContent}>
             <div className={cls.info}>
-              <p>
+              {userOwnerName && <p>
                 You`re logged in as <br/>
                 <span className={cls.userOwnerName}>
                   {userOwnerName} 
                 </span>
-              </p>
+              </p>}
             </div>
             <div className={cls.button}>
               <Button text='LogOut' onClick={logOut} />

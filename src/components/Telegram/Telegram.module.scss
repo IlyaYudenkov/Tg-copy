@@ -5,4 +5,5 @@
     grid-template-areas: 'sidebar chatWindow';
     grid-template-columns: minmax(0.25fr) 0.75fr;
     grid-template-rows: 100vh;
+    overflow-x: hidden;
 }
